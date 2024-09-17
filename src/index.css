@@ -1,0 +1,45 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Stile per le scrollbar sui browser basati su WebKit (Chrome, Safari) */
+::-webkit-scrollbar {
+  width: 12px;
+  height: 12px;
+}
+
+::-webkit-scrollbar-track {
+  background: #ffcc00; 
+  border-radius: 10px;
+  border: 2px solid #dcdcdc; 
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #ff0000; 
+  border-radius: 10px;
+  border: 2px solid #fff; 
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: #ffcc00; 
+}
+
+/* Stile per scrollbar su Firefox */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #ff0000 #ffcc00;
+}
+
+*::-webkit-scrollbar-corner {
+  background-color: #ffcc00;
+}
+
+.circle-light {
+  background: radial-gradient(circle,#b4b7bd, #1D4ED8 60%);
+  transition: background .5s ease;
+  cursor: pointer;
+}
+
+.circle-light:hover {
+  background: radial-gradient(circle,#eeeeee, #1D4ED8 70%);
+}
