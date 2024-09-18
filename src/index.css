@@ -35,11 +35,10 @@
 }
 
 .circle-light {
-  background: radial-gradient(circle,#b4b7bd, #1D4ED8 60%);
-  transition: background .5s ease;
+  background: radial-gradient(circle,#b4b7bd, transparent 60%);
   cursor: pointer;
 }
 
 .circle-light:hover {
-  background: radial-gradient(circle,#eeeeee, #1D4ED8 70%);
+  background: radial-gradient(circle,#eeeeee, transparent 70%);
 }

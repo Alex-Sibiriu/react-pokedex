@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-export default function ImageComponent({ src, alt }) {
+export default function ImageComponent({ src, alt, ...props }) {
 	const [isLoaded, setIsLoaded] = useState(true);
 
 	// Gestione errore di caricamento
@@ -14,12 +14,6 @@ export default function ImageComponent({ src, alt }) {
 	}
 
 	return (
-		<img
-			src={src}
-			alt={alt}
-			onError={handleError}
-			loading="lazy"
-			className="p-4"
-		/>
+		<img src={src} alt={alt} {...props} onError={handleError} loading="lazy" />
 	);
 }

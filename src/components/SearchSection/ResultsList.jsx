@@ -1,6 +1,14 @@
 import ImageComponent from "../UI/ImageComponent";
+import { setSearch } from "../../store/searchParams";
+import { useDispatch } from "react-redux";
 
 export default function ResultsList({ count }) {
+	const dispatch = useDispatch();
+
+	function handleClick(dexNum) {
+		dispatch(setSearch(dexNum));
+	}
+
 	const ImagesUrl = [];
 
 	for (let i = 0; i < count; i++) {
@@ -14,17 +22,20 @@ export default function ResultsList({ count }) {
 	}
 
 	return (
-		<div className="overflow-auto border-4 rounded-xl border-yellow-400">
-			<ul className="flex flex-wrap bg-blue-700">
-				{ImagesUrl.map((image) => (
-					<li
-						key={image.dexNum}
-						className="w-full sm:w-1/2 md:w-1/3 lg:w-1/4 xl:w-1/5 circle-light"
-					>
-						<ImageComponent src={image.url} loading="lazy" alt={image.dexNum} />
-					</li>
-				))}
-			</ul>
-		</div>
+		<ul className="flex flex-wrap">
+			{ImagesUrl.map((image) => (
+				<li
+					key={image.dexNum}
+					className="w-full sm:w-1/2 md:w-1/3 lg:w-1/4 xl:w-1/6 circle-light"
+				>
+					<ImageComponent
+						src={image.url}
+						alt={image.dexNum}
+						onClick={() => handleClick(image.dexNum)}
+						className="p-4"
+					/>
+				</li>
+			))}
+		</ul>
 	);
 }

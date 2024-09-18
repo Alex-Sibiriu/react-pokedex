@@ -1,6 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import { useSelector } from "react-redux";
 import ResultsList from "./ResultsList";
+import PokeDetails from "./PokeDetails";
 
 function fetchPokemons(identifier) {
 	return fetch(`https://pokeapi.co/api/v2/pokemon/${identifier}`).then(
@@ -17,7 +18,11 @@ export default function SearchResults() {
 	});
 
 	if (isLoading) {
-		return <p>Loading...</p>;
+		return (
+			<div className="overflow-auto border-4 bg-blue-700 rounded-xl border-yellow-400">
+				<p>Loading...</p>;
+			</div>
+		);
 	}
 
 	if (!data) {
@@ -28,13 +33,10 @@ export default function SearchResults() {
 		return <p>Error: {error.message}</p>;
 	}
 
-	if (toSearch === "" && data.count) {
-		return <ResultsList count={data.count} />;
-	}
-
 	return (
-		<div>
-			<p>{data.name}</p>
+		<div className="overflow-auto border-4 bg-blue-700 rounded-xl border-yellow-400">
+			{toSearch === "" && data.count && <ResultsList count={data.count} />}
+			{toSearch !== "" && <PokeDetails pokemon={data} />}
 		</div>
 	);
 }
