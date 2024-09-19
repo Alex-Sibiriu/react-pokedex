@@ -1,14 +1,19 @@
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import Pokedex from "./components/Pokedex";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import RootLayout from "./layouts/Root";
+import SearchPage from "./pages/SearchPage";
+import PokeDetailsPage from "./pages/PokeDetailsPage";
 
-const queryClient = new QueryClient();
+const router = createBrowserRouter([
+	{
+		path: "/",
+		element: <RootLayout />,
+		children: [
+			{ index: true, element: <SearchPage /> },
+			{ path: "pokemon/:pokeNum", element: <PokeDetailsPage /> },
+		],
+	},
+]);
 
 export default function App() {
-	return (
-		<div className="h-screen content-center bg-blue-500">
-			<QueryClientProvider client={queryClient}>
-				<Pokedex />
-			</QueryClientProvider>
-		</div>
-	);
+	return <RouterProvider router={router} />;
 }

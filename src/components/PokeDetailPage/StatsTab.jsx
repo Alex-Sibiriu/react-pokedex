@@ -57,7 +57,7 @@ export default function StatsTab({ stats }) {
 					</span>
 					<span className="flex-grow relative border-2 border-blue-600">
 						<span
-							className={`absolute left-0 h-full rounded-e-full bg-gradient-to-b ${
+							className={`stat-bar absolute left-0 h-full rounded-e-full bg-gradient-to-b ${
 								statColors[st.stat.name]?.gradient
 							}`}
 							style={{

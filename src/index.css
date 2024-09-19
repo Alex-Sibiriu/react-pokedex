@@ -42,3 +42,12 @@
 .circle-light:hover {
   background: radial-gradient(circle,#eeeeee, transparent 70%);
 }
+
+.stat-bar {
+  animation: 2s statGrowth ease-out;
+}
+
+@keyframes statGrowth{
+  0%{max-width: 0;}
+  100%{max-width: 100%;}
+}
