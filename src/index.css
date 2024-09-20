@@ -2,6 +2,11 @@
 @tailwind components;
 @tailwind utilities;
 
+section {
+  width: 83.333333%;
+  margin: 0 auto;
+}
+
 /* Stile per le scrollbar sui browser basati su WebKit (Chrome, Safari) */
 ::-webkit-scrollbar {
   width: 12px;
@@ -34,13 +39,17 @@
   background-color: #ffcc00;
 }
 
-.circle-light {
-  background: radial-gradient(circle,#b4b7bd, transparent 60%);
+.bg-pkImage {
+  background: linear-gradient(to bottom ,#79F3FE , #0573A6 );
+  background-attachment: fixed;
+  border: 2px solid transparent;
+  transition: border .2s;
   cursor: pointer;
 }
 
-.circle-light:hover {
-  background: radial-gradient(circle,#eeeeee, transparent 70%);
+.bg-pkImage:hover {
+  z-index: 10;
+  border: 2px solid yellow;
 }
 
 .stat-bar {
@@ -51,3 +60,17 @@
   0%{max-width: 0;}
   100%{max-width: 100%;}
 }
+
+.swiper {
+  width: 100%;
+  height: 100%;
+}
+
+.swiper-slide {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+

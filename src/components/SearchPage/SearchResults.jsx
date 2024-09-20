@@ -1,14 +1,19 @@
 import { useQuery } from "@tanstack/react-query";
 import { Link } from "react-router-dom";
 import ImageComponent from "../UI/ImageComponent";
-
-function fetchPokemons() {
-	return fetch(`https://pokeapi.co/api/v2/pokemon`).then((response) =>
-		response.json()
-	);
-}
+import { useState } from "react";
+import { useSelector } from "react-redux";
 
 export default function SearchResults() {
+	const [pokemonList, setPokemonList] = useState([]);
+	const toSearch = useSelector((state) => state.searchParams.toSearch);
+
+	function fetchPokemons() {
+		return fetch(`https://pokeapi.co/api/v2/pokemon?limit=10000`).then(
+			(response) => response.json()
+		);
+	}
+
 	const { data, isLoading, error } = useQuery({
 		queryKey: ["pokemons", "all"],
 		queryFn: fetchPokemons,
@@ -26,35 +31,45 @@ export default function SearchResults() {
 		return <p>Error: {error.message}</p>;
 	}
 
+	if (pokemonList != data.results) {
+		setPokemonList(data.results);
+	}
+
 	const ImagesUrl = [];
 
-	for (let i = 0; i < data.count; i++) {
+	for (let i = 0; i < data.results.length; i++) {
 		const image = {
-			url: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${
+			url: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${
 				i + 1
 			}.png`,
-			dexNum: i + 1,
+			pokeName: data.results[i].name,
 		};
 		ImagesUrl.push(image);
 	}
 
+	function findSprite(name) {
+		return ImagesUrl.find((sprite) => sprite.pokeName === name);
+	}
+
 	return (
-		<div className="overflow-auto border-4 bg-blue-700 rounded-xl border-yellow-400">
-			<ul className="flex flex-wrap">
-				{ImagesUrl.map((image) => (
-					<li
-						key={image.dexNum}
-						className="w-full min-[450px]:w-1/2 sm:w-1/3 md:w-1/4 lg:w-1/5 circle-light"
-					>
-						<Link to={`/pokemon/${image.dexNum}`}>
-							<ImageComponent
-								src={image.url}
-								alt={image.dexNum}
-								className="p-4"
-							/>
-						</Link>
-					</li>
-				))}
+		<div className="overflow-y-auto overflow-x-hidden h-full border-4 bg-gradient-to-b from-blue-50 to-[#0DE0F5] rounded-xl border-yellow-400">
+			<ul className="grid grid-cols-2 min-[450px]:grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-1 p-1">
+				{pokemonList
+					.filter((p) => p.name.includes(toSearch))
+					.map((pokemon) => (
+						<li key={pokemon.name} className="bg-clip-content">
+							<Link
+								to={`/pokemon/${pokemon.name}`}
+								className="flex justify-center h-full"
+							>
+								<ImageComponent
+									src={findSprite(pokemon.name).url}
+									alt={pokemon.name}
+									className="p-2 w-full transition-all duration-1000 rounded-sm bg-pkImage"
+								/>
+							</Link>
+						</li>
+					))}
 			</ul>
 		</div>
 	);

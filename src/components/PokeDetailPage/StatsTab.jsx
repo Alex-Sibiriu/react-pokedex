@@ -42,31 +42,41 @@ export default function StatsTab({ stats }) {
 	}
 
 	return (
-		<ul className="rounded-md overflow-hidden border-8 bg-white border-blue-600">
-			{stats.map((st, i) => (
-				<li
-					className="capitalize flex font-bold"
-					key={st.stat.name}
-					style={{
-						backgroundColor: statColors[st.stat.name]?.light || "#F5F5F5",
-					}}
-				>
-					<span className="w-32 flex px-2 py-1 border-2 border-blue-600">
-						{renameStats(st.stat.name)}:{" "}
-						<span className="w-8 inline-block ms-auto">{st.base_stat}</span>
-					</span>
-					<span className="flex-grow relative border-2 border-blue-600">
+		<section className="text-center">
+			<h2 className="font-bold text-xl pb-4 pt-8">Base Stats</h2>
+			<ul className="rounded-md overflow-hidden border-2 border-stone-100 bg-stone-100">
+				{stats.map((st, i) => (
+					<li
+						className="capitalize flex font-bold overflow-hidden rounded-md"
+						key={st.stat.name}
+					>
 						<span
-							className={`stat-bar absolute left-0 h-full rounded-e-full bg-gradient-to-b ${
-								statColors[st.stat.name]?.gradient
-							}`}
+							className="w-32 flex px-2 py-1 border-2 border-stone-100 rounded-md overflow-hidden"
 							style={{
-								width: statBar(st.base_stat),
+								backgroundColor: statColors[st.stat.name]?.light || "#F5F5F5",
 							}}
-						></span>
-					</span>
-				</li>
-			))}
-		</ul>
+						>
+							{renameStats(st.stat.name)}
+							<span className="w-8 inline-block ms-auto">{st.base_stat}</span>
+						</span>
+						<span
+							className="flex-grow relative border-2 overflow-hidden border-stone-100 rounded-md"
+							style={{
+								backgroundColor: statColors[st.stat.name]?.light || "#F5F5F5",
+							}}
+						>
+							<span
+								className={`stat-bar absolute left-0 h-full rounded-e-full bg-gradient-to-b ${
+									statColors[st.stat.name]?.gradient
+								}`}
+								style={{
+									width: statBar(st.base_stat),
+								}}
+							></span>
+						</span>
+					</li>
+				))}
+			</ul>
+		</section>
 	);
 }
