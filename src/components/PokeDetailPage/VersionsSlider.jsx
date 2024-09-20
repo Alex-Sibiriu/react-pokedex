@@ -3,6 +3,8 @@ import {
 	faChevronLeft,
 	faChevronRight,
 } from "@fortawesome/free-solid-svg-icons";
+import { versionColors } from "../../utils/setColors";
+import { useState } from "react";
 
 import { Swiper, SwiperSlide } from "swiper/react";
 
@@ -14,20 +16,36 @@ import "../../index.css";
 
 import { Keyboard, Navigation } from "swiper/modules";
 
-import { versionColors } from "../../utils/setColors";
-
 export default function VersionSlider({
 	descriptions,
 	onClick,
 	selectedVersion,
 }) {
+	const [isBeginning, setIsBeginning] = useState(true);
+	const [isEnd, setIsEnd] = useState(false);
+
 	return (
 		<div className="flex w-full relative">
-			<button className="custom-prev w-6 h-6 flex items-center justify-center bg-stone-100 absolute -left-7 top-1/2 transform -translate-y-1/2 rounded-full">
+			<button
+				disabled={isBeginning}
+				className={`custom-prev transition-all w-6 h-6 flex items-center justify-center rounded-full absolute -left-7 top-1/2 transform -translate-y-1/2 border-r-2 border-b-2 cursor-pointer text-sm ${
+					isBeginning
+						? "bg-yellow-200 text-stone-400 border-yellow-300"
+						: "bg-yellow-400  border-yellow-600"
+				}`}
+			>
 				<FontAwesomeIcon icon={faChevronLeft} />
 			</button>
 			<Swiper
-				spaceBetween={0}
+				onSlideChange={(swiper) => {
+					setIsBeginning(swiper.isBeginning);
+					setIsEnd(swiper.isEnd);
+				}}
+				onSwiper={(swiper) => {
+					setIsBeginning(swiper.isBeginning);
+					setIsEnd(swiper.isEnd);
+				}}
+				spaceBetween={2}
 				keyboard={{
 					enabled: true,
 				}}
@@ -54,7 +72,7 @@ export default function VersionSlider({
 					nextEl: ".custom-next",
 				}}
 				modules={[Keyboard, Navigation]}
-				className="mySwiper mx-auto"
+				className="mySwiper mx-auto relative"
 			>
 				{descriptions.map((text) => (
 					<SwiperSlide key={text.version.name}>
@@ -72,9 +90,17 @@ export default function VersionSlider({
 						</p>
 					</SwiperSlide>
 				))}
+				<div className="w-full bottom-0 absolute border-b-2 border-red-100"></div>
 			</Swiper>
 
-			<button className="custom-next w-6 h-6 flex items-center justify-center rounded-full absolute -right-7 bg-stone-100 top-1/2 transform -translate-y-1/2">
+			<button
+				disabled={isEnd}
+				className={`custom-next w-6 h-6 flex items-center justify-center rounded-full absolute -right-7 top-1/2 transform -translate-y-1/2 border-r-2 border-b-2 cursor-pointer text-sm ${
+					isEnd
+						? "bg-yellow-200 text-stone-400 border-yellow-300"
+						: "bg-yellow-400  border-yellow-600"
+				}`}
+			>
 				<FontAwesomeIcon icon={faChevronRight} />
 			</button>
 		</div>

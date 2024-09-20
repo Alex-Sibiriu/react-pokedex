@@ -8,7 +8,7 @@ export default function ImageComponent({ src, alt, ...props }) {
 		setIsLoaded(false);
 	};
 
-	// Se l'immagine non si carica, non rendere nulla
+	// Se l'immagine non si carica, non renderizzare nulla
 	if (!isLoaded) {
 		return null;
 	}

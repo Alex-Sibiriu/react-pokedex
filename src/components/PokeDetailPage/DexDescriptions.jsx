@@ -31,7 +31,7 @@ export default function DexDescriptions({ descriptions }) {
 			</ul>
 			<div
 				className={`${
-					versionColors[version] || "bg-stone-100"
+					versionColors[version] || "bg-stone-100 shadow-inset-border"
 				} border-2 border-t-0 border-stone-100 rounded-b-md p-8 transition-all`}
 			>
 				<p>{formattedText || "Select a game version."}</p>

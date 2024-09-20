@@ -7,6 +7,10 @@ section {
   margin: 0 auto;
 }
 
+ul,li {
+  list-style: none;
+}
+
 /* Stile per le scrollbar sui browser basati su WebKit (Chrome, Safari) */
 ::-webkit-scrollbar {
   width: 12px;

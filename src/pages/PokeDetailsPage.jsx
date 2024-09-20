@@ -1,14 +1,70 @@
-import { useState } from "react";
-import ImageComponent from "../components/UI/ImageComponent";
-import TypeBadge from "../components/UI/TypeBadge";
 import { setBgColors } from "../utils/setColors";
 import StatsTab from "../components/PokeDetailPage/StatsTab";
 import { Link, useParams } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
-import Searchbar from "../components/Searchbar";
 import MainDetails from "../components/PokeDetailPage/MainDetails";
 import AbilityDetails from "../components/PokeDetailPage/AbilityDetails";
 import DexDescriptions from "../components/PokeDetailPage/DexDescriptions";
+import DetailHeader from "../components/PokeDetailPage/DetailHeader";
+import Varieties from "../components/PokeDetailPage/Varieties";
+import EvolutionChain from "../components/PokeDetailPage/EvolutionChain";
+
+const suffixesToRemove = [
+	"-standard",
+	"-zen",
+	"-alola",
+	"-galar",
+	"-totem-alola",
+	"-vmax",
+	"-mega-x",
+	"-mega-y",
+	"-mega",
+	"-gmax",
+	"-terastal",
+	"-stellar",
+	"-ice",
+	"-shadow",
+	"-paldea-combat-breed",
+	"-paldea-blaze-breed",
+	"-paldea-aqua-breed",
+	"-hisui",
+	"-totem",
+	"-battle-bond",
+	"-primal",
+	"-sky",
+	"-land",
+	"-complete",
+	"-10",
+	"-50",
+	"-origin",
+	"-incarnate",
+	"-therian",
+	"-crowned",
+	"-eternamax",
+	"-single-strike",
+	"-rapid-strike",
+	"-black",
+	"-white",
+	"-ordinary",
+	"-resolute",
+	"-aria",
+	"-pirouette",
+	"-dawn",
+	"-midday",
+	"-dusk",
+	"-dada",
+	"-bloodmoon",
+	"-male",
+	"-female",
+	"-sunny",
+	"-rainy",
+	"-snowy",
+	"-normal",
+	"-attack",
+	"-defense",
+	"-speed",
+	"-altered",
+];
 
 function fetchPokemon(name) {
 	return fetch(`https://pokeapi.co/api/v2/pokemon/${name}`).then((response) =>
@@ -16,7 +72,11 @@ function fetchPokemon(name) {
 	);
 }
 
-function fetchEvolutionChain(name) {
+function fetchSpecies(name) {
+	suffixesToRemove.forEach((suffix) => {
+		name = name.replace(suffix, "");
+	});
+
 	return fetch(`https://pokeapi.co/api/v2/pokemon-species/${name}`).then(
 		(response) => response.json()
 	);
@@ -24,8 +84,6 @@ function fetchEvolutionChain(name) {
 
 export default function PokeDetailsPage() {
 	const { pokeName } = useParams();
-
-	console.log(pokeName);
 
 	const {
 		data: pokemon,
@@ -42,7 +100,7 @@ export default function PokeDetailsPage() {
 		error: evoError,
 	} = useQuery({
 		queryKey: ["evoChain", `pokemon-${pokeName}`],
-		queryFn: () => fetchEvolutionChain(pokeName),
+		queryFn: () => fetchSpecies(pokeName),
 	});
 
 	if (isLoading || evoIsLoading) {
@@ -63,14 +121,25 @@ export default function PokeDetailsPage() {
 				HOME
 			</Link>
 			<div
-				className={`py-4 w-full h-full overflow-auto mt-4 bg-gradient-to-br border-4 border-yellow-400 rounded-md ${setBgColors(
+				className={`pb-4 pt-1 w-full h-full overflow-auto mt-4 bg-gradient-to-br border-4 border-yellow-400 rounded-md ${setBgColors(
 					pokemon.types
 				)}`}
 			>
-				<MainDetails pokemon={pokemon} genera={evoData.genera} />
+				<DetailHeader id={evoData.id} />
+				<MainDetails
+					pokemon={pokemon}
+					genera={evoData?.genera}
+					dexNum={evoData.pokedex_numbers[0].entry_number}
+				/>
 				<AbilityDetails pokemon={pokemon} />
+				{evoData && evoData.varieties?.length > 1 && (
+					<Varieties varieties={evoData.varieties} />
+				)}
+				<EvolutionChain url={evoData.evolution_chain.url} />
+				{evoData && (
+					<DexDescriptions descriptions={evoData.flavor_text_entries} />
+				)}
 				<StatsTab stats={pokemon.stats} />
-				<DexDescriptions descriptions={evoData.flavor_text_entries} />
 			</div>
 		</div>
 	);
