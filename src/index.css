@@ -11,6 +11,19 @@ ul,li {
   list-style: none;
 }
 
+.bg-ball {
+  background-image: url('/public/assets/ballIcon.png');
+  background-position: center;
+  background-size: 90%;
+  background-repeat: no-repeat;
+  transition: all .3s;
+}
+
+.bg-ball:hover {
+  background-size: 110%;
+  filter: brightness(.95);
+}
+
 /* Stile per le scrollbar sui browser basati su WebKit (Chrome, Safari) */
 ::-webkit-scrollbar {
   width: 12px;

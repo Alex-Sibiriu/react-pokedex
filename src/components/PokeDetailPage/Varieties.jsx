@@ -48,6 +48,7 @@ export default function Varieties({ varieties }) {
 										<ImageComponent
 											src={result.data.sprites.front_default}
 											alt={result.data.name}
+											className="bg-ball"
 										/>
 									)}
 									<p className="w-full">{formatName(result.data.name)}</p>

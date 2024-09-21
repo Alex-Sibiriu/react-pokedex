@@ -64,6 +64,9 @@ const suffixesToRemove = [
 	"-defense",
 	"-speed",
 	"-altered",
+	"-wellspring-mask",
+	"-hearthflame-mask",
+	"-cornerstone-mask",
 ];
 
 function fetchPokemon(name) {

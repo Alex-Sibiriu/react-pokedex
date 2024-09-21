@@ -1,3 +1,7 @@
 export function formatName(name) {
-	return name.includes("-") ? name.replace(/-/g, " ") : name;
+	name = name.includes("-") ? name.replace(/-/g, " ") : name;
+
+	name = name.includes("_") ? name.replace(/_/g, " ") : name;
+
+	return name;
 }
