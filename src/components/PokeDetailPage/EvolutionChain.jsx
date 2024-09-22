@@ -2,6 +2,8 @@ import { useQuery } from "@tanstack/react-query";
 import { Link } from "react-router-dom";
 import ImageComponent from "../UI/ImageComponent";
 import { formatName } from "../../utils/typo";
+import { faMars, faVenus } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 function fetchEvoChain(url) {
 	return fetch(url).then((response) => response.json());
@@ -13,10 +15,23 @@ function getPkmNum(speciesUrl) {
 }
 
 function printTrigger(obj) {
-	return Object.keys(obj).map((key) => (
-		<li key={key}>
+	const printedKeys = {};
+
+	Object.keys(obj).map((key) => {
+		const keyString =
+			typeof obj[key] === "object" ? JSON.stringify(obj[key]) : key;
+
+		if (printedKeys[keyString]) {
+			return null;
+		}
+
+		printedKeys[keyString] = true;
+	});
+
+	return Object.keys(obj).map((key, i) => (
+		<li key={i}>
 			{obj[key]?.name ? (
-				<div className="flex flex-col justify-center items-center text-center">
+				<div className="flex flex-col justify-center items-center text-center py-1">
 					<ImageComponent
 						src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/${obj[key].name}.png`}
 						className="block w-8"
@@ -33,10 +48,17 @@ function printTrigger(obj) {
 				</div>
 			) : (
 				<div>
-					{obj[key] && key !== "trigger" && key !== "item" && (
+					{obj[key] && (
 						<span>
 							{formatName(key)}
-							{key === "needs_overworld_rain" ? "" : ":"} {obj[key]}
+							{key === "needs_overworld_rain" ? "" : ":"}{" "}
+							{key === "gender" ? "" : obj[key]}
+							{key && key === "gender" && (
+								<FontAwesomeIcon
+									icon={obj[key] === 1 ? faVenus : faMars}
+									className={obj[key] === 1 ? "text-pink-400" : "text-blue-400"}
+								/>
+							)}
 						</span>
 					)}
 				</div>
@@ -55,7 +77,7 @@ export default function EvolutionChain({ url }) {
 		<section className="text-center">
 			<h2 className="font-bold text-xl py-4 pt-8">Evolution Chain</h2>
 
-			<div className="py-4 px-8 bg-stone-100 mx-auto rounded-lg shadow-inset-border">
+			<div className="py-4 px-4 md:px-8 bg-stone-100 mx-auto rounded-lg shadow-inset-border">
 				{isLoading ? (
 					<p>Loading...</p>
 				) : error ? (
@@ -64,16 +86,16 @@ export default function EvolutionChain({ url }) {
 					<p>This pokemon has no evolutions.</p>
 				) : (
 					<div
-						className={`capitalize grid ${
+						className={`capitalize grid gap-8 ${
 							data.chain.evolves_to[0]
 								? data.chain.evolves_to[0].evolves_to[0]
-									? "grid-cols-3"
-									: "grid-cols-2"
+									? "grid-cols-1 md:grid-cols-3"
+									: "grid-cols-1 sm:grid-cols-2"
 								: ""
 						}`}
 					>
-						<div className="flex items-center justify-evenly">
-							<div className="flex flex-col justify-center items-center text-center">
+						<div className="flex flex-col sm:flex-row items-center justify-evenly">
+							<div className="flex flex-col w-full justify-center gap-8 items-center text-center py-4 sm:p-0 sm:pr-4">
 								{data.chain.is_baby && data.baby_trigger_item?.name && (
 									<ImageComponent
 										src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/${data.baby_trigger_item?.name}.png`}
@@ -89,13 +111,13 @@ export default function EvolutionChain({ url }) {
 										: "base form"}
 								</p>
 							</div>
-							<div>
+							<div className="shrink-0">
 								<Link to={`/pokemon/${data.chain.species.name}`}>
 									<ImageComponent
 										src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${getPkmNum(
 											data.chain.species.url
 										)}.png`}
-										className="bg-ball"
+										className="bg-ball h-[125px]"
 									/>
 									<p>{data.chain.species.name}</p>
 								</Link>
@@ -103,23 +125,30 @@ export default function EvolutionChain({ url }) {
 						</div>
 						{data.chain.evolves_to[0] && (
 							<ul className="flex flex-col w-full gap-8 items-center justify-evenly">
-								{data.chain.evolves_to.map((evo) => (
+								{data.chain.evolves_to.map((evo, i) => (
 									<li
-										key={evo}
-										className="h-[125px] w-full flex justify-between items-center"
+										key={i}
+										className="w-full flex flex-col sm:flex-row sm:justify-between items-center"
 									>
-										<ul className="text-center flex-grow pr-4 text-sm">
+										<ul className="text-center flex-grow sm:pr-4 text-sm py-4 sm:p-0">
 											{evo.evolution_details.map((e) => printTrigger(e))}
 										</ul>
-										<div>
-											<Link to={`/pokemon/${evo.species.name}`}>
+										<div className="shrink-0">
+											<Link
+												to={`/pokemon/${
+													evo.species.name === "lycanroc"
+														? "lycanroc-midday"
+														: evo.species.name
+												}`}
+											>
 												<ImageComponent
 													src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${getPkmNum(
 														evo.species.url
 													)}.png`}
-													className="bg-ball"
+													className="bg-ball h-[125px]"
 												/>
 												<p>{evo.species.name}</p>
+												<small>First Evolution</small>
 											</Link>
 										</div>
 									</li>
@@ -132,53 +161,27 @@ export default function EvolutionChain({ url }) {
 									ev.evolves_to.map((evo) => (
 										<li
 											key={evo.species.name}
-											className="h-[125px] w-full flex justify-between items-center"
+											className="w-full flex flex-col sm:flex-row sm:justify-between items-center"
 										>
-											<ul className="text-center flex-grow pr-4 text-sm">
+											<ul className="text-center flex-grow sm:pr-4 text-sm py-4 sm:p-0">
 												{evo.evolution_details.map((e) => printTrigger(e))}
 											</ul>
-											<div>
+											<div className="shrink-0">
 												<Link to={`/pokemon/${evo.species.name}`}>
 													<ImageComponent
 														src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${getPkmNum(
 															evo.species.url
 														)}.png`}
-														className="bg-ball"
+														className="bg-ball h-[125px]"
 													/>
 													<p>{evo.species.name}</p>
+													<small>Second Evolution</small>
 												</Link>
 											</div>
 										</li>
 									))
 								)}
 							</ul>
-
-							// <>
-							// 	<li className="flex items-center">
-							// 		{formatName(
-							// 			data.chain.evolves_to[0].evolves_to[0].evolution_details[0]
-							// 				.trigger.name
-							// 		)}
-
-							// 		{
-							// 			data.chain.evolves_to[0].evolves_to[0].evolution_details[0]
-							// 				.min_level
-							// 		}
-							// 	</li>
-							// 	<li>
-							// 		<Link
-							// 			to={`/pokemon/${data.chain.evolves_to[0].evolves_to[0].species.name}`}
-							// 		>
-							// 			<ImageComponent
-							// 				src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${getPkmNum(
-							// 					data.chain.evolves_to[0].evolves_to[0].species.url
-							// 				)}.png`}
-							// 				className="bg-ball"
-							// 			/>
-							// 			<p>{data.chain.evolves_to[0].evolves_to[0].species.name}</p>
-							// 		</Link>
-							// 	</li>
-							// </>
 						)}
 					</div>
 				)}

@@ -9,65 +9,7 @@ import DetailHeader from "../components/PokeDetailPage/DetailHeader";
 import Varieties from "../components/PokeDetailPage/Varieties";
 import EvolutionChain from "../components/PokeDetailPage/EvolutionChain";
 
-const suffixesToRemove = [
-	"-standard",
-	"-zen",
-	"-alola",
-	"-galar",
-	"-totem-alola",
-	"-vmax",
-	"-mega-x",
-	"-mega-y",
-	"-mega",
-	"-gmax",
-	"-terastal",
-	"-stellar",
-	"-ice",
-	"-shadow",
-	"-paldea-combat-breed",
-	"-paldea-blaze-breed",
-	"-paldea-aqua-breed",
-	"-hisui",
-	"-totem",
-	"-battle-bond",
-	"-primal",
-	"-sky",
-	"-land",
-	"-complete",
-	"-10",
-	"-50",
-	"-origin",
-	"-incarnate",
-	"-therian",
-	"-crowned",
-	"-eternamax",
-	"-single-strike",
-	"-rapid-strike",
-	"-black",
-	"-white",
-	"-ordinary",
-	"-resolute",
-	"-aria",
-	"-pirouette",
-	"-dawn",
-	"-midday",
-	"-dusk",
-	"-dada",
-	"-bloodmoon",
-	"-male",
-	"-female",
-	"-sunny",
-	"-rainy",
-	"-snowy",
-	"-normal",
-	"-attack",
-	"-defense",
-	"-speed",
-	"-altered",
-	"-wellspring-mask",
-	"-hearthflame-mask",
-	"-cornerstone-mask",
-];
+import { suffixesToRemove } from "../utils/typo";
 
 function fetchPokemon(name) {
 	return fetch(`https://pokeapi.co/api/v2/pokemon/${name}`).then((response) =>
@@ -118,6 +60,10 @@ export default function PokeDetailsPage() {
 		return <div>Error: {evoError.message}</div>;
 	}
 
+	const filteredVarieties = evoData.varieties.filter(
+		(v) => !v.pokemon.name.includes("-totem")
+	);
+
 	return (
 		<div className="w-full flex flex-col">
 			<Link to={"/"} className="text-white font-bold">
@@ -135,14 +81,14 @@ export default function PokeDetailsPage() {
 					dexNum={evoData.pokedex_numbers[0].entry_number}
 				/>
 				<AbilityDetails pokemon={pokemon} />
-				{evoData && evoData.varieties?.length > 1 && (
+				{evoData && filteredVarieties?.length > 1 && (
 					<Varieties varieties={evoData.varieties} />
 				)}
 				<EvolutionChain url={evoData.evolution_chain.url} />
 				{evoData && (
 					<DexDescriptions descriptions={evoData.flavor_text_entries} />
 				)}
-				<StatsTab stats={pokemon.stats} />
+				<StatsTab key={pokemon.name} stats={pokemon.stats} />
 			</div>
 		</div>
 	);

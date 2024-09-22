@@ -15,7 +15,7 @@ export default function AbilityDetails({ pokemon }) {
 		<section className="text-center">
 			<h2 className="font-bold text-xl py-4">Abilities</h2>
 
-			<ul className="flex justify-evenly py-4 bg-stone-100 mx-auto rounded-lg shadow-inset-border">
+			<ul className="flex flex-col sm:flex-row gap-4 justify-evenly py-4 bg-stone-100 mx-auto rounded-lg shadow-inset-border">
 				{pokemon.abilities.map((a) => (
 					<li key={a.ability.name} className="capitalize">
 						<strong>

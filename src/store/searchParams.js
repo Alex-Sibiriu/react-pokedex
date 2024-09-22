@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-	selectedRegion: null,
+	selectedGeneration: null,
 	selectedType: null,
 	toSearch: "",
 };
@@ -10,8 +10,8 @@ const searchSlice = createSlice({
 	name: "searchParams",
 	initialState: initialState,
 	reducers: {
-		setRegion(state, action) {
-			state.selectedRegion = action.payload;
+		setGeneration(state, action) {
+			state.selectedGeneration = action.payload;
 		},
 		setType(state, action) {
 			state.selectedType = action.payload;
@@ -22,6 +22,6 @@ const searchSlice = createSlice({
 	},
 });
 
-export const { setRegion, setSearch, setType } = searchSlice.actions;
+export const { setGeneration, setSearch, setType } = searchSlice.actions;
 
 export default searchSlice.reducer;

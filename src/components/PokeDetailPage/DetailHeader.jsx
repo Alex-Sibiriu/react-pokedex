@@ -8,6 +8,8 @@ import {
 import ImageComponent from "../UI/ImageComponent";
 import { Link } from "react-router-dom";
 
+import { formatName } from "../../utils/typo";
+
 function fetchPokemon(id) {
 	if (id < 0 || id > 1025) {
 		return null;
@@ -54,8 +56,8 @@ export default function DetailHeader({ id }) {
 							alt={prevData.name}
 							className="h-14 mx-2"
 						/>
-						<small>
-							#{prevData.id} {prevData.name}
+						<small className="hidden min-[500px]:inline-block">
+							#{prevData.id} {formatName(prevData.name)}
 						</small>
 					</Link>
 				)}
@@ -66,8 +68,8 @@ export default function DetailHeader({ id }) {
 						to={`/pokemon/${nextData.name}`}
 						className="flex items-center capitalize"
 					>
-						<small>
-							#{nextData.id} {nextData.name}
+						<small className="hidden min-[500px]:inline-block">
+							#{nextData.id} {formatName(nextData.name)}
 						</small>
 						<ImageComponent
 							src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${nextData.id}.png`}

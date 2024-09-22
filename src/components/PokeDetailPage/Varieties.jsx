@@ -23,18 +23,22 @@ export default function Varieties({ varieties }) {
 
 	const variantWidth = `w-1/${results.length}`;
 
+	const filteredVarieties = results.filter(
+		(v) => !v.data?.name.includes("-totem")
+	);
+
 	return (
 		<section className="text-center">
 			<h2 className="font-bold text-xl py-4 pt-8">Varieties</h2>
 
-			<ul className="flex justify-evenly py-4 bg-stone-100 mx-auto rounded-lg shadow-inset-border">
+			<ul className="flex flex-wrap gap-4 justify-evenly py-4 bg-stone-100 mx-auto rounded-lg shadow-inset-border">
 				{isLoading ? (
 					<li>Loading...</li>
 				) : hasError ? (
 					<li>There was an error loading the varieties.</li>
 				) : (
-					results.map((result, i) => (
-						<li key={i} className={`capitalize w-full ${variantWidth} `}>
+					filteredVarieties.map((result, i) => (
+						<li key={i} className={`capitalize ${variantWidth} `}>
 							{result.isLoading ? (
 								<span>Loading...</span>
 							) : result.error ? (
@@ -48,7 +52,7 @@ export default function Varieties({ varieties }) {
 										<ImageComponent
 											src={result.data.sprites.front_default}
 											alt={result.data.name}
-											className="bg-ball"
+											className="bg-ball h-[125px]"
 										/>
 									)}
 									<p className="w-full">{formatName(result.data.name)}</p>

@@ -7,6 +7,9 @@ import { useSelector } from "react-redux";
 export default function SearchResults() {
 	const [pokemonList, setPokemonList] = useState([]);
 	const toSearch = useSelector((state) => state.searchParams.toSearch);
+	const selectedGeneration = useSelector(
+		(state) => state.searchParams.selectedGeneration
+	);
 
 	function fetchPokemons() {
 		return fetch(`https://pokeapi.co/api/v2/pokemon?limit=10000`).then(
@@ -53,9 +56,16 @@ export default function SearchResults() {
 
 	return (
 		<div className="overflow-y-auto overflow-x-hidden h-full border-4 bg-gradient-to-b from-blue-50 to-[#0DE0F5] rounded-xl border-yellow-400">
-			<ul className="grid grid-cols-2 min-[450px]:grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-1 p-1">
+			<ul className="grid grid-cols-2 min-[450px]:grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 gap-1 p-1">
 				{pokemonList
-					.filter((p) => p.name.includes(toSearch))
+					.filter(
+						(p, i) =>
+							p.name.includes(toSearch) &&
+							(selectedGeneration
+								? i + 1 >= selectedGeneration.first &&
+								  i + 1 <= selectedGeneration.last
+								: i)
+					)
 					.map((pokemon) => (
 						<li key={pokemon.name} className="bg-clip-content">
 							<Link

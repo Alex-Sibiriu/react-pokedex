@@ -25,7 +25,7 @@ export const versionColors = {
 	"alpha-sapphire": "text-white bg-blue-700",
 	sun: "bg-orange-500",
 	moon: "text-white bg-blue-900",
-	"ultra-sun": "bg-orange-700",
+	"ultra-sun": "text-white bg-orange-700",
 	"ultra-moon": "text-white bg-blue-900",
 	"lets-go-pikachu": "bg-yellow-400",
 	"lets-go-eevee": "text-white bg-amber-800",

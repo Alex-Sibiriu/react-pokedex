@@ -51,7 +51,7 @@ export default function StatsTab({ stats }) {
 						key={st.stat.name}
 					>
 						<span
-							className="w-32 flex px-2 py-1 border-2 border-stone-100 rounded-md overflow-hidden"
+							className="w-full sm:w-32 flex px-2 py-1 border-2 border-stone-100 rounded-md overflow-hidden"
 							style={{
 								backgroundColor: statColors[st.stat.name]?.light || "#F5F5F5",
 							}}
@@ -60,7 +60,7 @@ export default function StatsTab({ stats }) {
 							<span className="w-8 inline-block ms-auto">{st.base_stat}</span>
 						</span>
 						<span
-							className="flex-grow relative border-2 overflow-hidden border-stone-100 rounded-md"
+							className="flex-grow relative border-2 overflow-hidden border-stone-100 rounded-md hidden sm:inline-block"
 							style={{
 								backgroundColor: statColors[st.stat.name]?.light || "#F5F5F5",
 							}}
