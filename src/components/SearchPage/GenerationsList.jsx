@@ -2,6 +2,9 @@ import { useQuery } from "@tanstack/react-query";
 import { useDispatch, useSelector } from "react-redux";
 import { setGeneration } from "../../store/searchParams";
 
+import { generationsColors } from "../../utils/setColors";
+import { useEffect, useRef, useState } from "react";
+
 const generations = {
 	"generation-i": { name: "generation-i", first: 1, last: 151 },
 	"generation-ii": { name: "generation-ii", first: 152, last: 251 },
@@ -25,10 +28,25 @@ export default function GenerationsList() {
 	const selectedGeneration = useSelector(
 		(state) => state.searchParams.selectedGeneration
 	);
+	const [isOpen, setIsOpen] = useState(false);
+	const selectRef = useRef(null);
 
 	function handleClick(gen) {
 		dispatch(setGeneration(gen));
 	}
+
+	// Handle clicking outside the dropdown
+	useEffect(() => {
+		function handleClickOutside(event) {
+			if (selectRef.current && !selectRef.current.contains(event.target)) {
+				setIsOpen(false);
+			}
+		}
+		document.addEventListener("mousedown", handleClickOutside);
+		return () => {
+			document.removeEventListener("mousedown", handleClickOutside);
+		};
+	}, []);
 
 	const { data, isLoading, error } = useQuery({
 		queryKey: ["generations", 1],
@@ -43,33 +61,59 @@ export default function GenerationsList() {
 		return <div>Error: {error.message}</div>;
 	}
 
-	console.log(selectedGeneration);
-
 	return (
-		<ul className="flex gap-1 text-white mt-6 pl-4">
-			<li
-				onClick={() => handleClick(null)}
-				className={`cursor-pointer rounded-t-lg px-2 py-1 font-bold border-4 border-b-0 border-yellow-500 transition-all  uppercase ${
-					selectedGeneration
-						? "bg-amber-500 hover:bg-yellow-500"
-						: "bg-yellow-400"
-				}`}
-			>
-				All
-			</li>
-			{data.results.map((generation) => (
-				<li
-					onClick={() => handleClick(generations[generation.name])}
-					key={generation.name}
-					className={`cursor-pointer rounded-t-lg px-2 py-1 font-bold border-4 border-b-0 border-yellow-500 transition-all uppercase ${
-						selectedGeneration && selectedGeneration.name === generation.name
-							? "bg-yellow-400"
-							: "bg-amber-500 hover:bg-yellow-500"
+		<div className="font-bold flex items-center text-white">
+			<label htmlFor="gen-select" className="mr-2">
+				Gen:
+			</label>
+			<div ref={selectRef} className="relative w-16">
+				<button
+					id="gen-select"
+					aria-haspopup="listbox"
+					aria-expanded={isOpen}
+					onClick={() => setIsOpen(!isOpen)}
+					className={`text-center transition-all rounded-md uppercase border-2 border-stone-100 p-1 w-full bg-gradient-to-b ${
+						generationsColors[selectedGeneration?.name] ??
+						generationsColors["all"]
 					}`}
 				>
-					{generation.name.split("-")[1]}
-				</li>
-			))}
-		</ul>
+					{selectedGeneration ? selectedGeneration.name.split("-")[1] : "All"}
+				</button>
+				<ul
+					role="listbox"
+					className={`absolute transition-all duration-500 top-full left-0 w-full bg-white border-stone-100 rounded-md z-10 overflow-hidden ${
+						isOpen ? "max-h-96 border-2" : "max-h-0 border-0"
+					}`}
+				>
+					<li
+						role="option"
+						aria-selected={selectedGeneration === "all"}
+						className={`cursor-pointer border-2 border-stone-100 p-1 font-bold transition-all uppercase ${generationsColors["all"]}`}
+						onClick={() => {
+							handleClick(null);
+							setIsOpen(false);
+						}}
+					>
+						All
+					</li>
+					{data.results.map((generation) => (
+						<li
+							key={generation.name}
+							role="option"
+							aria-selected={selectedGeneration === generation.name}
+							onClick={() => {
+								handleClick(generations[generation.name]);
+								setIsOpen(false);
+							}}
+							className={`cursor-pointer border-2 border-stone-100 p-1 font-bold transition-all uppercase ${
+								generationsColors[generation.name]
+							}`}
+						>
+							{generation.name.split("-")[1]}
+						</li>
+					))}
+				</ul>
+			</div>
+		</div>
 	);
 }

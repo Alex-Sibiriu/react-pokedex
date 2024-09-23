@@ -1,4 +1,16 @@
 export const suffixesToRemove = [
+	"-drive-mode",
+	"-gliding-build",
+	"-aquatic-mode",
+	"-swimming-build",
+	"-sprinting-build",
+	"-limited-build",
+	"-family-of-three",
+	"-paldea-combat-breed",
+	"-paldea-blaze-breed",
+	"-paldea-aqua-breed",
+	"-totem-alola",
+	"-low-key",
 	"-own-tempo",
 	"-midnight",
 	"-starter",
@@ -7,7 +19,6 @@ export const suffixesToRemove = [
 	"-zen",
 	"-alola",
 	"-galar",
-	"-totem-alola",
 	"-vmax",
 	"-mega-x",
 	"-mega-y",
@@ -17,9 +28,6 @@ export const suffixesToRemove = [
 	"-stellar",
 	"-ice",
 	"-shadow",
-	"-paldea-combat-breed",
-	"-paldea-blaze-breed",
-	"-paldea-aqua-breed",
 	"-hisui",
 	"-totem",
 	"-battle-bond",
@@ -47,8 +55,8 @@ export const suffixesToRemove = [
 	"-dusk",
 	"-dada",
 	"-bloodmoon",
-	"-male",
 	"-female",
+	"-male",
 	"-sunny",
 	"-rainy",
 	"-snowy",
@@ -63,12 +71,13 @@ export const suffixesToRemove = [
 	"-ultra",
 	"-solo",
 	"-school",
+	"-amped",
 ];
 
 export function formatName(name) {
-	suffixesToRemove.forEach((suffix) => {
-		name = name.replace(suffix, "");
-	});
+	// suffixesToRemove.forEach((suffix) => {
+	// 	name = name.replace(suffix, "");
+	// });
 
 	name = name.includes("-") ? name.replace(/-/g, " ") : name;
 

@@ -59,17 +59,32 @@ export const typeBackgrounds = {
 	fairy: "from-fairy-light to-fairy-dark",
 };
 
-export function setBgColors(types) {
-	if (types.length === 1) {
-		return (
-			`${typeBackgrounds[types[0].type.name]}` || "from-gray-300 to-gray-500"
-		);
-	} else if (types.length === 2) {
-		const fromType = types[0].type.name || "gray-300";
-		const toType = types[1].type.name || "gray-500";
+export const generationsColors = {
+	all: "bg-gradient-to-b from-stone-300 to-stone-400", // All generations
+	"generation-i": "bg-gradient-to-b from-red-600 via-yellow-400 to-blue-600", // Pokémon Red/Blue/Green
+	"generation-ii": "bg-gradient-to-b to-amber-500 from-stone-400", // Pokémon Gold/Silver/Crystal
+	"generation-iii": "bg-gradient-to-b from-red-600 to-blue-500", // Pokémon Ruby/Sapphire/Emerald
+	"generation-iv": "bg-gradient-to-b from-indigo-300 to-pink-300", // Pokémon Diamond/Pearl/Platinum
+	"generation-v": "bg-gradient-to-b from-stone-200 to-stone-800", // Pokémon Black/White
+	"generation-vi": "bg-gradient-to-b from-blue-500 to-red-500", // Pokémon X/Y
+	"generation-vii": "bg-gradient-to-b from-orange-500 to-purple-600", // Pokémon Sun/Moon/Ultra Sun/Ultra Moon
+	"generation-viii": "bg-gradient-to-b from-indigo-700 to-purple-500", // Pokémon Sword/Shield
+	"generation-ix": "bg-gradient-to-b from-red-600 to-violet-600", // Pokémon Scarlet/Violet
+};
 
-		return `from-${fromType} to-${toType}`;
+export function setBgColors(types) {
+	if (typeof types === "string") {
+		return typeBackgrounds[types] || "from-stone-300 to-stone-400";
+	} else if (Array.isArray(types) && types.length === 1) {
+		const typeName = types[0].type?.name || types[0];
+		return typeBackgrounds[typeName] || "from-gray-300 to-gray-500";
+	} else if (Array.isArray(types) && types.length === 2) {
+		const fromType = types[0].type?.name || "gray-300";
+		const toType = types[1].type?.name || "gray-500";
+		return ` from-${fromType} to-${toType} `;
 	}
+
+	return "from-stone-300 to-stone-400";
 }
 
 export function setStatColor(stat) {

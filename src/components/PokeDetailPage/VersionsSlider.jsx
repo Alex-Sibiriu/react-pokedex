@@ -30,8 +30,8 @@ export default function VersionSlider({
 				disabled={isBeginning}
 				className={`custom-prev transition-all w-6 h-6 flex items-center justify-center rounded-full absolute -left-7 top-1/2 transform -translate-y-1/2 border-r-2 border-b-2 cursor-pointer text-sm ${
 					isBeginning
-						? "bg-yellow-200 text-stone-400 border-yellow-300"
-						: "bg-yellow-400  border-yellow-600"
+						? "opacity-0"
+						: "opacity-100 bg-yellow-400  border-yellow-600"
 				}`}
 			>
 				<FontAwesomeIcon icon={faChevronLeft} />
@@ -95,10 +95,8 @@ export default function VersionSlider({
 
 			<button
 				disabled={isEnd}
-				className={`custom-next w-6 h-6 flex items-center justify-center rounded-full absolute -right-7 top-1/2 transform -translate-y-1/2 border-r-2 border-b-2 cursor-pointer text-sm ${
-					isEnd
-						? "bg-yellow-200 text-stone-400 border-yellow-300"
-						: "bg-yellow-400  border-yellow-600"
+				className={`custom-next transition-all w-6 h-6 flex items-center justify-center rounded-full absolute -right-7 top-1/2 transform -translate-y-1/2 border-r-2 border-b-2 cursor-pointer text-sm ${
+					isEnd ? "opacity-0" : "opacity-100 bg-yellow-400  border-yellow-600"
 				}`}
 			>
 				<FontAwesomeIcon icon={faChevronRight} />

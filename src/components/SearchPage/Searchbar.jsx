@@ -1,7 +1,9 @@
 import { useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { setSearch } from "../store/searchParams";
+import { setSearch } from "../../store/searchParams";
 import { useNavigate } from "react-router-dom";
+import GenerationsList from "./GenerationsList";
+import TypesList from "./TypesList";
 
 export default function Searchbar() {
 	const toSearch = useSelector((state) => state.searchParams.toSearch);
@@ -16,7 +18,7 @@ export default function Searchbar() {
 	}
 
 	return (
-		<div className="text-center">
+		<div className="text-center flex justify-between">
 			<input
 				defaultValue={toSearch}
 				onChange={handleChange}
@@ -25,7 +27,14 @@ export default function Searchbar() {
 				placeholder="Search by name or number"
 				className="p-2 w-[250px] rounded-md me-2 border-4 border-stone-600"
 			/>
-			<button className="bg-yellow-400 px-4 py-2 rounded-md">Search</button>
+
+			<GenerationsList />
+
+			<TypesList />
+
+			<button className="bg-yellow-400 font-bold px-4 py-2 rounded-md">
+				Search
+			</button>
 		</div>
 	);
 }
