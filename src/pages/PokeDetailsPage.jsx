@@ -10,6 +10,7 @@ import Varieties from "../components/PokeDetailPage/Varieties";
 import EvolutionChain from "../components/PokeDetailPage/EvolutionChain";
 
 import { suffixesToRemove } from "../utils/typo";
+import Loader from "../components/UI/Loader";
 
 function fetchPokemon(name) {
 	return fetch(`https://pokeapi.co/api/v2/pokemon/${name}`).then((response) =>
@@ -30,6 +31,8 @@ function fetchSpecies(name) {
 export default function PokeDetailsPage() {
 	const { pokeName } = useParams();
 
+	let content = null;
+
 	const {
 		data: pokemon,
 		isLoading,
@@ -49,31 +52,16 @@ export default function PokeDetailsPage() {
 	});
 
 	if (isLoading || evoIsLoading) {
-		return <p>Loading...</p>;
+		content = <Loader />;
 	}
 
-	if (error) {
-		return <div>Error: {error.message}</div>;
-	}
+	if (pokemon && evoData) {
+		const filteredVarieties = evoData.varieties.filter(
+			(v) => !v.pokemon.name.includes("-totem")
+		);
 
-	if (evoError) {
-		return <div>Error: {evoError.message}</div>;
-	}
-
-	const filteredVarieties = evoData.varieties.filter(
-		(v) => !v.pokemon.name.includes("-totem")
-	);
-
-	return (
-		<div className="w-full flex flex-col">
-			<Link to={"/"} className="text-white font-bold">
-				HOME
-			</Link>
-			<div
-				className={`pb-4 pt-1 w-full h-full overflow-auto mt-4 bg-gradient-to-br border-4 border-yellow-400 rounded-md ${setBgColors(
-					pokemon.types
-				)}`}
-			>
+		content = (
+			<>
 				<DetailHeader id={evoData.id} />
 				<MainDetails
 					pokemon={pokemon}
@@ -89,6 +77,25 @@ export default function PokeDetailsPage() {
 					<DexDescriptions descriptions={evoData.flavor_text_entries} />
 				)}
 				<StatsTab key={pokemon.name} stats={pokemon.stats} />
+			</>
+		);
+	}
+
+	if (error || evoError) {
+		content = <div>Error: {error.message || evoError.message}</div>;
+	}
+
+	return (
+		<div className="w-full flex flex-col">
+			<Link to={"/"} className="text-white font-bold">
+				HOME
+			</Link>
+			<div
+				className={`pb-4 pt-1 w-full h-full transition-all duration-700 overflow-auto mt-4 bg-gradient-to-br border-4 border-yellow-400 rounded-md ${setBgColors(
+					pokemon?.types
+				)}`}
+			>
+				{content}
 			</div>
 		</div>
 	);

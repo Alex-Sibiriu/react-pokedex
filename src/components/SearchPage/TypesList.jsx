@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import { useDispatch, useSelector } from "react-redux";
-import { setType } from "../../store/searchParams";
+import { setType1, setType2 } from "../../store/searchParams";
 import { setBgColors } from "../../utils/setColors";
 import { useEffect, useRef, useState } from "react";
 
@@ -10,14 +10,20 @@ function fetchTypes() {
 	);
 }
 
-export default function TypesList() {
+export default function TypesList({ typeNum }) {
 	const dispatch = useDispatch();
-	const selectedType = useSelector((state) => state.searchParams.selectedType);
+	const selectedType = useSelector(
+		(state) => state.searchParams.selectedTypes[typeNum]
+	);
 	const [isOpen, setIsOpen] = useState(false);
 	const selectRef = useRef(null);
 
 	function handleClick(type) {
-		dispatch(setType(type));
+		if (typeNum === "type_1") {
+			dispatch(setType1(type));
+		} else if (typeNum === "type_2") {
+			dispatch(setType2(type));
+		}
 	}
 
 	// Handle clicking outside the dropdown
@@ -48,8 +54,8 @@ export default function TypesList() {
 
 	return (
 		<div className="font-bold flex items-center text-white ">
-			<label htmlFor="type-select" className="text-white mr-2">
-				Type:
+			<label htmlFor="type-select" className="text-white mr-2 capitalize">
+				{typeNum.replace("_", " ")}:
 			</label>
 			<div className="relative w-28" ref={selectRef}>
 				{/* Dropdown button */}

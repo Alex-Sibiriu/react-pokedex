@@ -24,17 +24,15 @@ export default function Searchbar() {
 				onChange={handleChange}
 				ref={searchValue}
 				type="search"
-				placeholder="Search by name or number"
+				placeholder="Search by name"
 				className="p-2 w-[250px] rounded-md me-2 border-4 border-stone-600"
 			/>
 
 			<GenerationsList />
 
-			<TypesList />
+			<TypesList typeNum={"type_1"} />
 
-			<button className="bg-yellow-400 font-bold px-4 py-2 rounded-md">
-				Search
-			</button>
+			<TypesList typeNum={"type_2"} />
 		</div>
 	);
 }
