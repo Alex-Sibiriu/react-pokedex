@@ -7,6 +7,12 @@ import ShinyStars from "../UI/ShinyStars";
 export default function MainDetails({ pokemon, genera = "", dexNum }) {
 	const [isShiny, setIsShiny] = useState(false);
 
+	const favoritesPkm = JSON.parse(localStorage.getItem("FavoritesPkm")) || [];
+
+	const [exist, setExist] = useState(
+		favoritesPkm.find((pkm) => pkm.name === pokemon.name)
+	);
+
 	let pokeImage = isShiny ? "front_shiny" : "front_default";
 
 	useEffect(() => {
@@ -28,9 +34,27 @@ export default function MainDetails({ pokemon, genera = "", dexNum }) {
 	const engGenus =
 		genera != "" ? genera.find((g) => g.language.name === "en") : "";
 
+	function toggleCatch(name, sprite) {
+		if (exist) {
+			const updatedFavorites = favoritesPkm.filter((pkm) => pkm.name !== name);
+
+			localStorage.setItem("FavoritesPkm", JSON.stringify(updatedFavorites));
+			setExist(false);
+		} else {
+			favoritesPkm.push({
+				name,
+				sprite,
+			});
+
+			setExist(true);
+
+			localStorage.setItem("FavoritesPkm", JSON.stringify(favoritesPkm));
+		}
+	}
+
 	return (
-		<section className="flex flex-col sm:flex-row justify-between">
-			<div className="sm:w-5/12 relative select-none">
+		<section className="flex flex-col md:flex-row justify-between">
+			<div className="md:w-5/12 relative select-none">
 				{pokemon.sprites.other["official-artwork"].front_shiny && (
 					<ShinyStars isShiny={isShiny} onClick={toggleShiny} />
 				)}
@@ -40,15 +64,15 @@ export default function MainDetails({ pokemon, genera = "", dexNum }) {
 					className="bg-pokeball w-full aspect-square py-4 px-3 rounded-xl bg-stone-100 shadow-inset-border"
 				/>
 			</div>
-			<div className="sm:w-1/2 py-2 mb-8 flex flex-col justify-between">
+			<div className="md:w-1/2 pt-8 md:py-2 mb-8 flex flex-col justify-between">
 				<div className="capitalize text-center pb-4">
 					<h1 className="font-bold text-2xl">
 						#{dexNum} {formatName(pokemon.name)}
 					</h1>
 					<h5>{engGenus.genus}</h5>
 				</div>
-				<div className="text-center sm:text-start">
-					<div className="flex items-center justify-center sm:justify-start gap-2 pb-2 capitalize">
+				<div className="text-center md:text-start">
+					<div className="flex items-center justify-center md:justify-start gap-2 pb-2 capitalize">
 						<strong>Type{pokemon.types.length > 1 ? "s" : ""}: </strong>
 						<ul className="flex gap-2">
 							{pokemon.types.map((t) => (
@@ -70,6 +94,23 @@ export default function MainDetails({ pokemon, genera = "", dexNum }) {
 					<p className="pb-2">
 						<strong>Gender Rate: </strong>
 					</p>
+
+					{!pokemon.name.includes("-vmax") &&
+						!pokemon.name.includes("-gmax") &&
+						!pokemon.name.includes("-mega") && (
+							<div className="text-center pt-4">
+								<span
+									onClick={() =>
+										toggleCatch(pokemon.name, pokemon.sprites.front_default)
+									}
+									className="cursor-pointer inline-block w-32 py-1 mx-auto transition-all rounded-full font-bold bg-white hover:bg-stone-100 border-4 border-red-600 text-red-600"
+								>
+									{favoritesPkm.find((pkm) => pkm.name === pokemon.name)
+										? "Free"
+										: "Catch"}
+								</span>
+							</div>
+						)}
 				</div>
 			</div>
 		</section>

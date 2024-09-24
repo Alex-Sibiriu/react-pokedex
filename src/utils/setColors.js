@@ -30,7 +30,7 @@ export const versionColors = {
 	"lets-go-pikachu": "bg-yellow-400",
 	"lets-go-eevee": "text-white bg-amber-800",
 	sword: "text-white bg-indigo-700",
-	shield: "bg-purple-500",
+	shield: "text-white bg-purple-500",
 	"brilliant-diamond": "bg-indigo-500",
 	"shining-pearl": "bg-pink-300",
 	"legends-arceus": "bg-yellow-500",

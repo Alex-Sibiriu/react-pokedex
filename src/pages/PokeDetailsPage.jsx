@@ -61,7 +61,7 @@ export default function PokeDetailsPage() {
 		);
 
 		content = (
-			<>
+			<div className="w-full pb-8">
 				<DetailHeader id={evoData.id} />
 				<MainDetails
 					pokemon={pokemon}
@@ -77,7 +77,7 @@ export default function PokeDetailsPage() {
 					<DexDescriptions descriptions={evoData.flavor_text_entries} />
 				)}
 				<StatsTab key={pokemon.name} stats={pokemon.stats} />
-			</>
+			</div>
 		);
 	}
 
@@ -86,17 +86,12 @@ export default function PokeDetailsPage() {
 	}
 
 	return (
-		<div className="w-full flex flex-col">
-			<Link to={"/"} className="text-white font-bold">
-				HOME
-			</Link>
-			<div
-				className={`pb-4 pt-1 w-full h-full transition-all duration-700 overflow-auto mt-4 bg-gradient-to-br border-4 border-yellow-400 rounded-md ${setBgColors(
-					pokemon?.types
-				)}`}
-			>
-				{content}
-			</div>
+		<div
+			className={`w-full h-full pt-1 transition-all duration-700 mt-4 bg-gradient-to-br border-4 border-b-0 border-yellow-400 rounded-md ${
+				isLoading || evoIsLoading ? "overflow-hidden" : "overflow-y-auto"
+			} ${setBgColors(pokemon?.types)}`}
+		>
+			{content}
 		</div>
 	);
 }

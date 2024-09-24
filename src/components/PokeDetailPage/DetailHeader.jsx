@@ -56,7 +56,7 @@ export default function DetailHeader({ id }) {
 							alt={prevData.name}
 							className="h-14 mx-2"
 						/>
-						<small className="hidden min-[500px]:inline-block">
+						<small className="hidden min-[500px]:inline-block press-start-2p-small">
 							#{prevData.id} {formatName(prevData.name)}
 						</small>
 					</Link>
@@ -68,7 +68,7 @@ export default function DetailHeader({ id }) {
 						to={`/pokemon/${nextData.name}`}
 						className="flex items-center capitalize"
 					>
-						<small className="hidden min-[500px]:inline-block">
+						<small className="hidden min-[500px]:inline-block press-start-2p-small">
 							#{nextData.id} {formatName(nextData.name)}
 						</small>
 						<ImageComponent

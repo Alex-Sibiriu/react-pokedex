@@ -50,21 +50,17 @@ export default function VersionSlider({
 					enabled: true,
 				}}
 				breakpoints={{
-					450: {
+					500: {
 						slidesPerView: 2,
 						slidesPerGroup: 2,
 					},
-					600: {
+					625: {
 						slidesPerView: 3,
 						slidesPerGroup: 3,
 					},
 					850: {
 						slidesPerView: 4,
 						slidesPerGroup: 4,
-					},
-					1000: {
-						slidesPerView: 5,
-						slidesPerGroup: 5,
 					},
 				}}
 				navigation={{
@@ -78,7 +74,7 @@ export default function VersionSlider({
 					<SwiperSlide key={text.version.name}>
 						<p
 							onClick={() => onClick(text.version.name)}
-							className={`text-center cursor-pointer font-bold w-full transition-all border-2 border-stone-100 rounded-t-lg capitalize ${
+							className={`text-center text-md cursor-pointer font-bold w-full transition-all border-2 border-stone-100 rounded-t-lg capitalize ${
 								versionColors[text.version.name]
 							} ${
 								selectedVersion === text.version.name

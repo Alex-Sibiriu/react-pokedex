@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+body {
+  font-family: "Poppins", sans-serif;
+}
+
 section {
   width: 70%;
   margin: 0 auto;
@@ -9,6 +13,24 @@ section {
 
 ul,li {
   list-style: none;
+}
+
+.press-start-2p-regular {
+  font-family: "Press Start 2P", system-ui;
+  font-weight: 400;
+  font-style: normal;
+  font-size: .8rem;
+}
+
+.press-start-2p-small {
+  font-family: "Press Start 2P", system-ui;
+  font-weight: 400;
+  font-style: normal;
+  font-size: .6rem;
+}
+
+.pokedex {
+  height: 90%;
 }
 
 .bg-pokeball {

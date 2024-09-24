@@ -1,10 +1,23 @@
 export const suffixesToRemove = [
+	"-full-belly",
+	"-hangry",
 	"-drive-mode",
 	"-gliding-build",
 	"-aquatic-mode",
 	"-swimming-build",
 	"-sprinting-build",
 	"-limited-build",
+	"-cosplay",
+	"-rock-star",
+	"-pop-star",
+	"-original-cap",
+	"-hoenn-cap",
+	"-sinnoh-cap",
+	"-unova-cap",
+	"-kalos-cap",
+	"-world-cap",
+	"-alola-cap",
+	"-partner-cap",
 	"-family-of-three",
 	"-paldea-combat-breed",
 	"-paldea-blaze-breed",
@@ -72,6 +85,9 @@ export const suffixesToRemove = [
 	"-solo",
 	"-school",
 	"-amped",
+	"-belle",
+	"-phd",
+	"-libre",
 ];
 
 export function formatName(name) {

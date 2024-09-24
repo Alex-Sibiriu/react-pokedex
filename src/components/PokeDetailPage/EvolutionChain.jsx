@@ -95,7 +95,7 @@ export default function EvolutionChain({ url }) {
 						}`}
 					>
 						<div className="flex flex-col sm:flex-row items-center justify-evenly">
-							<div className="flex flex-col w-full justify-center gap-8 items-center text-center py-4 sm:p-0 sm:pr-4">
+							<div className="flex flex-col w-full justify-center gap-1 items-center text-center py-4 sm:p-0 sm:pr-4">
 								{data.chain.is_baby && data.baby_trigger_item?.name && (
 									<ImageComponent
 										src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/${data.baby_trigger_item?.name}.png`}

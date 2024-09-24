@@ -18,21 +18,32 @@ export default function Searchbar() {
 	}
 
 	return (
-		<div className="text-center flex justify-between">
-			<input
-				defaultValue={toSearch}
-				onChange={handleChange}
-				ref={searchValue}
-				type="search"
-				placeholder="Search by name"
-				className="p-2 w-[250px] rounded-md me-2 border-4 border-stone-600"
-			/>
+		<div className="text-center py-2 w-full flex flex-col md:flex-row gap-4">
+			<div className="content-center text-white font-bold flex flex-col lg:flex-row items-center justify-center">
+				<label
+					htmlFor="name"
+					className="pb-2 lg:pb-0 block mr-2 content-center"
+				>
+					Name
+				</label>
+				<input
+					id="name"
+					defaultValue={toSearch}
+					onChange={handleChange}
+					ref={searchValue}
+					type="search"
+					placeholder="Search by name"
+					className="px-2 py-[6px] w-[250px] rounded-md border-0 shadow-inset-border"
+				/>
+			</div>
 
-			<GenerationsList />
+			<div className="flex justify-evenly w-full">
+				<GenerationsList />
 
-			<TypesList typeNum={"type_1"} />
+				<TypesList typeNum={"type_1"} />
 
-			<TypesList typeNum={"type_2"} />
+				<TypesList typeNum={"type_2"} />
+			</div>
 		</div>
 	);
 }

@@ -3,7 +3,7 @@ import SearchResults from "../components/SearchPage/SearchResults";
 
 export default function SearchPage() {
 	return (
-		<div className="w-full flex flex-col border-red-800">
+		<div className="w-full h-full flex flex-wrap">
 			<Searchbar />
 			<SearchResults />
 		</div>
