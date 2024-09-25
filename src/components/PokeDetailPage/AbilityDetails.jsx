@@ -12,7 +12,7 @@ export default function AbilityDetails({ pokemon }) {
 	}
 
 	return (
-		<section className="text-center">
+		<section className="text-center w-[94%] mx-auto">
 			<h2 className="font-bold text-xl py-4">Abilities</h2>
 
 			<ul className="flex flex-col sm:flex-row gap-4 justify-evenly py-4 bg-stone-100 mx-auto rounded-lg shadow-inset-border">

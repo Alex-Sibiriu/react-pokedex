@@ -53,7 +53,7 @@ export default function MainDetails({ pokemon, genera = "", dexNum }) {
 	}
 
 	return (
-		<section className="flex flex-col md:flex-row justify-between">
+		<section className="flex flex-col md:flex-row justify-between w-[94%] mx-auto">
 			<div className="md:w-5/12 relative select-none">
 				{pokemon.sprites.other["official-artwork"].front_shiny && (
 					<ShinyStars isShiny={isShiny} onClick={toggleShiny} />

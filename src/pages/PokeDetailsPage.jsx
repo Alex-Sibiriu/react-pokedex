@@ -61,7 +61,7 @@ export default function PokeDetailsPage() {
 		);
 
 		content = (
-			<div className="w-full pb-8">
+			<div className="pb-8">
 				<DetailHeader id={evoData.id} />
 				<MainDetails
 					pokemon={pokemon}

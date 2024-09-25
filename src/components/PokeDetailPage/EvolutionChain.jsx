@@ -28,6 +28,12 @@ function printTrigger(obj) {
 		printedKeys[keyString] = true;
 	});
 
+	const symbols = {
+		1: ">",
+		"-1": "<",
+		0: "=",
+	};
+
 	return Object.keys(obj).map((key, i) => (
 		<li key={i}>
 			{obj[key]?.name ? (
@@ -48,19 +54,33 @@ function printTrigger(obj) {
 				</div>
 			) : (
 				<div>
-					{obj[key] && (
-						<span>
-							{formatName(key)}
-							{key === "needs_overworld_rain" ? "" : ":"}{" "}
-							{key === "gender" ? "" : obj[key]}
-							{key && key === "gender" && (
-								<FontAwesomeIcon
-									icon={obj[key] === 1 ? faVenus : faMars}
-									className={obj[key] === 1 ? "text-pink-400" : "text-blue-400"}
-								/>
-							)}
-						</span>
+					{key === "relative_physical_stats" && obj[key] === 0 && (
+						<span>Attack = Defense</span>
 					)}
+					{obj[key] === 0 ||
+						(obj[key] && (
+							<span>
+								{key !== "relative_physical_stats" && formatName(key)}
+								{key === "needs_overworld_rain" ||
+								key === "relative_physical_stats"
+									? ""
+									: ":"}{" "}
+								{key === "relative_physical_stats"
+									? `Attack ${symbols[obj[key]] || ""} Defense`
+									: ""}
+								{key === "gender" || key === "relative_physical_stats"
+									? ""
+									: obj[key]}
+								{key && key === "gender" && (
+									<FontAwesomeIcon
+										icon={obj[key] === 1 ? faVenus : faMars}
+										className={
+											obj[key] === 1 ? "text-pink-400" : "text-blue-400"
+										}
+									/>
+								)}
+							</span>
+						))}
 				</div>
 			)}
 		</li>
@@ -74,10 +94,10 @@ export default function EvolutionChain({ url }) {
 	});
 
 	return (
-		<section className="text-center">
+		<section className="text-center w-[94%] mx-auto">
 			<h2 className="font-bold text-xl py-4 pt-8">Evolution Chain</h2>
 
-			<div className="py-4 px-4 md:px-8 bg-stone-100 mx-auto rounded-lg shadow-inset-border">
+			<div className="py-4 md:px-8 bg-stone-100 rounded-lg shadow-inset-border">
 				{isLoading ? (
 					<p>Loading...</p>
 				) : error ? (

@@ -53,11 +53,8 @@ export default function TypesList({ typeNum }) {
 	}
 
 	return (
-		<div className="font-bold flex flex-col lg:flex-row items-center text-white ">
-			<label
-				htmlFor="type-select"
-				className="text-white pb-2 lg:pr-2 lg:pb-0 block capitalize"
-			>
+		<div className="font-bold flex flex-col items-center text-white ">
+			<label htmlFor="type-select" className="text-white pb-2 block capitalize">
 				{typeNum.replace("_", " ")}
 			</label>
 			<div className="relative w-28" ref={selectRef}>

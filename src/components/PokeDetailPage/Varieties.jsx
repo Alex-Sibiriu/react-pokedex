@@ -26,7 +26,7 @@ export default function Varieties({ varieties }) {
 	);
 
 	return (
-		<section className="text-center">
+		<section className="text-center w-[94%] mx-auto">
 			<h2 className="font-bold text-xl py-4 pt-8">Varieties</h2>
 
 			<ul className="flex flex-wrap justify-evenly py-4 bg-stone-100 mx-auto rounded-lg shadow-inset-border">

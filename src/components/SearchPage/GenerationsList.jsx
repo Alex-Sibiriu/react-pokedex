@@ -62,8 +62,8 @@ export default function GenerationsList() {
 	}
 
 	return (
-		<div className="font-bold flex flex-col lg:flex-row items-center text-white">
-			<label htmlFor="gen-select" className="pb-2 lg:pb-0 lg:pr-2">
+		<div className="font-bold flex flex-col items-center text-white">
+			<label htmlFor="gen-select" className="pb-2">
 				Gen
 			</label>
 			<div ref={selectRef} className="relative w-16">

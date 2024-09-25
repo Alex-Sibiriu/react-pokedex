@@ -4,11 +4,9 @@
 
 body {
   font-family: "Poppins", sans-serif;
-}
-
-section {
-  width: 70%;
-  margin: 0 auto;
+  background-image: url('/public/assets/background.jpg');
+  background-size: cover;
+  background-position: center;
 }
 
 ul,li {
@@ -133,6 +131,57 @@ ul,li {
 @keyframes ballRotate{
   0%{rotate: 0deg;}
   100%{rotate: 360deg;}
+}
+
+.pokelist {
+  opacity: 0;
+  animation: .3s fadeIn ease-out forwards;
+  animation-delay: calc(0.005s * var(--i)); 
+}
+
+@keyframes fadeIn {
+  0%{
+    opacity: 0;
+  }
+
+  100%{
+    opacity:1;
+  }
+}
+
+
+.poke-shadow {
+  background-image: url('/public/assets/shadow.png');
+  background-position-y: 83%;
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+
+.poke-sprite{
+  padding-top: 15px;
+}
+
+.poke-sprite:hover {
+  animation: .7s moveSprite linear infinite;
+  z-index: 10;
+}
+
+@keyframes moveSprite {
+  0%{
+    padding-top: 15px;
+  }
+  49%{
+    padding-top: 15px;
+  }
+  50%{
+    padding-top: 0;
+  }
+  99% {
+    padding-top: 0;
+  }
+  100%{
+    padding-top: 15px;
+  }
 }
 
 @media  screen and (min-width: 500px) {

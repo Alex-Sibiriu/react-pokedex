@@ -19,7 +19,7 @@ export default function DexDescriptions({ descriptions }) {
 		.replace(/\f/g, " ");
 
 	return (
-		<section className="text-center">
+		<section className="text-center w-[94%] mx-auto">
 			<h2 className="font-bold text-xl py-4 pt-8">Dex Descriptions</h2>
 
 			<ul className="flex justify-evenly mx-auto rounded-lg">

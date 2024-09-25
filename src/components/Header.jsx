@@ -7,14 +7,14 @@ export default function Header() {
 		<div className="flex text-center font-bold border-l-2 border-red-900 bg-red-700 rounded-t-xl overflow-hidden">
 			<div className="w-1/2 -skew-x-12 border-b-8 border-r-[6px] rounded-br-lg border-red-900 flex justify-center items-center">
 				<svg
-					className="mx-auto content-center pb-2"
+					className="mx-auto content-center"
 					width="330"
 					height="80"
-					viewBox="0 0 230 70"
+					viewBox="0 0 230 80"
 					preserveAspectRatio="none"
 				>
 					<path id="curve" d="M 0 60 Q 110 40 220 60" fill="transparent" />
-					<text width="100%" class="text-2xl font-bold">
+					<text width="100%" class="text-3xl font-bold">
 						<textPath
 							href="#curve"
 							startOffset="50%"

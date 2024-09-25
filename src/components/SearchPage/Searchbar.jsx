@@ -18,12 +18,9 @@ export default function Searchbar() {
 	}
 
 	return (
-		<div className="text-center py-2 w-full flex flex-col md:flex-row gap-4">
-			<div className="content-center text-white font-bold flex flex-col lg:flex-row items-center justify-center">
-				<label
-					htmlFor="name"
-					className="pb-2 lg:pb-0 block mr-2 content-center"
-				>
+		<div className="text-center py-2 w-full flex flex-col md:flex-row gap-4 md:gap-0">
+			<div className="content-center text-white font-bold flex flex-col items-center justify-center">
+				<label htmlFor="name" className="pb-2 block content-center">
 					Name
 				</label>
 				<input
@@ -33,7 +30,7 @@ export default function Searchbar() {
 					ref={searchValue}
 					type="search"
 					placeholder="Search by name"
-					className="px-2 py-[6px] w-[250px] rounded-md border-0 shadow-inset-border"
+					className="px-2 py-[6px] w-[250px] rounded-md border-0 shadow-inset-border text-stone-700"
 				/>
 			</div>
 

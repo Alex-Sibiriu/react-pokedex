@@ -1,4 +1,5 @@
 export const suffixesToRemove = [
+	"-three-segment",
 	"-full-belly",
 	"-hangry",
 	"-drive-mode",
@@ -88,6 +89,24 @@ export const suffixesToRemove = [
 	"-belle",
 	"-phd",
 	"-libre",
+	"-red-meteor",
+	"-orange-meteor",
+	"-yellow-meteor",
+	"-green-meteor",
+	"-blue-meteor",
+	"-indigo-meteor",
+	"-violet-meteor",
+	"-red",
+	"-orange",
+	"-yellow",
+	"-green",
+	"-blue",
+	"-indigo",
+	"-violet",
+	"-baile",
+	"-pom-pom",
+	"-pau",
+	"-sensu",
 ];
 
 export function formatName(name) {

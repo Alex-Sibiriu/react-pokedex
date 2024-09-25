@@ -42,7 +42,7 @@ export default function StatsTab({ stats }) {
 	}
 
 	return (
-		<section className="text-center">
+		<section className="text-center w-[94%] mx-auto">
 			<h2 className="font-bold text-xl pb-4 pt-8">Base Stats</h2>
 			<ul className="rounded-md overflow-hidden border-2 border-stone-100 bg-stone-100">
 				{stats.map((st, i) => (
