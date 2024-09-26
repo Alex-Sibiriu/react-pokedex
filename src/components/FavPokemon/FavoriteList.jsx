@@ -7,7 +7,7 @@ export default function FavoriteList({ background }) {
 		<div
 			className="overflow-y-auto transition-all duration-500 h-full w-full mt-6 overflow-x-hidden border-4 rounded-xl border-yellow-400 pb-4 bg-stone-100 bg-cover bg-center"
 			style={{
-				backgroundImage: `url(/public/assets/box-background/${background}.png)`,
+				backgroundImage: `url(${background})`,
 			}}
 		>
 			<PokemonList key={list} list={list} fallback="no pokémon catched yet!" />

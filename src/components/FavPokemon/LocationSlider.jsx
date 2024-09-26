@@ -3,7 +3,9 @@ import {
 	faChevronLeft,
 	faChevronRight,
 } from "@fortawesome/free-solid-svg-icons";
-import { useState } from "react";
+
+import { locations } from "../../utils/locations";
+import { formatLocationName } from "../../utils/locations";
 
 import { Swiper, SwiperSlide } from "swiper/react";
 
@@ -14,28 +16,6 @@ import "swiper/css/navigation";
 import "../../index.css";
 
 import { EffectFade, Keyboard, Navigation } from "swiper/modules";
-
-const locations = [
-	"forest",
-	"city",
-	"desert",
-	"savanna",
-	"crag",
-	"volcano",
-	"snow",
-	"cave",
-	"beach",
-	"seafloor",
-	"river",
-	"sky",
-	"checks",
-	"pokemon-center",
-	"machine",
-
-	"space",
-	"backyard",
-	"nostalgic",
-];
 
 export default function LocationSlider({ onClick, background }) {
 	return (
@@ -64,10 +44,10 @@ export default function LocationSlider({ onClick, background }) {
 							onClick={() => onClick(location)}
 							className="text-center text-md cursor-pointer font-bold w-full transition-all capitalize bg-cover bg-center py-2 text-stone-800"
 							style={{
-								backgroundImage: `url(/public/assets/box-background/${location}.png)`,
+								backgroundImage: `url(${location})`,
 							}}
 						>
-							{location}
+							{formatLocationName(location)}
 						</p>
 					</SwiperSlide>
 				))}
