@@ -1,7 +1,7 @@
 import PokemonList from "../PokemonList";
 
 export default function FavoriteList({ background }) {
-	const list = JSON.parse(localStorage.getItem("FavoritesPkm"));
+	const list = JSON.parse(localStorage.getItem("FavoritesPkm")) || [];
 
 	return (
 		<div

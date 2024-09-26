@@ -86,7 +86,7 @@ export default function SearchResults() {
 	}
 
 	if (!isLoading && !typeLoading1 && !typeLoading2) {
-		if (pokemonList != data.results) {
+		if (pokemonList.length != data.results.length) {
 			setPokemonList(data.results);
 		}
 

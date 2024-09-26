@@ -12,9 +12,9 @@ export default function PokemonList({ list, fallback }) {
 
 	return (
 		<>
-			<ul className="grid grid-cols-2 min-[450px]:grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 gap-1 p-1 pb-24">
-				{list.length > 0 &&
-					list.map((pokemon, i) => (
+			{list.length > 0 && (
+				<ul className="grid grid-cols-2 min-[450px]:grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 gap-1 p-1 pb-24">
+					{list.map((pokemon, i) => (
 						<li
 							key={pokemon.name}
 							className={`pokelist ${
@@ -46,7 +46,9 @@ export default function PokemonList({ list, fallback }) {
 							</Link>
 						</li>
 					))}
-			</ul>
+				</ul>
+			)}
+
 			{list.length === 0 && (
 				<div className="capitalize w-full h-full text-center content-center font-medium">
 					{fallback}
