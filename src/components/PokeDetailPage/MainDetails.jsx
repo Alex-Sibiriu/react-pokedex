@@ -3,6 +3,7 @@ import ImageComponent from "../UI/ImageComponent";
 import TypeBadge from "../UI/TypeBadge";
 import { formatName } from "../../utils/typo";
 import ShinyStars from "../UI/ShinyStars";
+import AudioPlayer from "../UI/AudioPlayer";
 
 export default function MainDetails({
 	pokemon,
@@ -74,8 +75,13 @@ export default function MainDetails({
 			</div>
 			<div className="md:w-1/2 pt-8 md:py-2 mb-8 flex flex-col justify-between">
 				<div className="capitalize text-center pb-4">
-					<h1 className="font-bold text-2xl">
-						#{dexNum} {formatName(pokemon.name)}
+					<h1 className="font-bold text-2xl flex items-center justify-center">
+						<span className="mr-2">
+							#{dexNum} {formatName(pokemon.name)}{" "}
+						</span>
+						<span className="text-lg inline">
+							<AudioPlayer src={pokemon.cries.latest} />
+						</span>
 					</h1>
 					<h5>{engGenus.genus}</h5>
 				</div>
