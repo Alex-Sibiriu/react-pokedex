@@ -105,7 +105,7 @@ export default function MainDetails({
 						<strong>Weight: </strong>
 						{pokeWeight} kg
 					</p>
-					<p className="pb-2">
+					<div className="pb-2">
 						<strong>Gender Rate: </strong>{" "}
 						{!femalePercentage ? "genderless" : ""}
 						{(femalePercentage || malePercentage) && (
@@ -126,7 +126,7 @@ export default function MainDetails({
 								</p>
 							</div>
 						)}
-					</p>
+					</div>
 
 					{!pokemon.name.includes("-vmax") &&
 						!pokemon.name.includes("-gmax") &&
