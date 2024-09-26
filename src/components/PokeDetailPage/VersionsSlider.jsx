@@ -28,7 +28,7 @@ export default function VersionSlider({
 		<div className="flex items-center gap-2 w-full relative">
 			<button
 				disabled={isBeginning}
-				className={`custom-prev transition-all w-6 h-6 flex items-center justify-center rounded-full border-r-2 border-b-2 cursor-pointer text-sm ${
+				className={`custom-prev transition-all w-6 h-6 flex items-center justify-center rounded-full border-r-2 border-b-2 cursor-pointer shrink-0 text-sm ${
 					isBeginning
 						? "opacity-0"
 						: "opacity-100 bg-yellow-400  border-yellow-600"
