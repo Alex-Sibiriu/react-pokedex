@@ -25,10 +25,10 @@ export default function VersionSlider({
 	const [isEnd, setIsEnd] = useState(false);
 
 	return (
-		<div className="flex w-full relative">
+		<div className="flex items-center gap-2 w-full relative">
 			<button
 				disabled={isBeginning}
-				className={`custom-prev transition-all w-6 h-6 flex items-center justify-center rounded-full absolute -left-7 top-1/2 transform -translate-y-1/2 border-r-2 border-b-2 cursor-pointer text-sm ${
+				className={`custom-prev transition-all w-6 h-6 flex items-center justify-center rounded-full border-r-2 border-b-2 cursor-pointer text-sm ${
 					isBeginning
 						? "opacity-0"
 						: "opacity-100 bg-yellow-400  border-yellow-600"
@@ -86,17 +86,17 @@ export default function VersionSlider({
 						</p>
 					</SwiperSlide>
 				))}
-				<div className="w-full bottom-0 absolute border-b-2 border-red-100"></div>
 			</Swiper>
 
 			<button
 				disabled={isEnd}
-				className={`custom-next transition-all w-6 h-6 flex items-center justify-center rounded-full absolute -right-7 top-1/2 transform -translate-y-1/2 border-r-2 border-b-2 cursor-pointer text-sm ${
+				className={`custom-next transition-all w-6 h-6 flex items-center justify-center rounded-full border-r-2 border-b-2 cursor-pointer shrink-0 text-sm ${
 					isEnd ? "opacity-0" : "opacity-100 bg-yellow-400  border-yellow-600"
 				}`}
 			>
 				<FontAwesomeIcon icon={faChevronRight} />
 			</button>
+			<div className="w-full bottom-0 absolute border-b-2 border-red-100"></div>
 		</div>
 	);
 }
