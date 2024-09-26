@@ -13,7 +13,7 @@ export default function PokemonList({ list, fallback }) {
 	return (
 		<>
 			{list.length > 0 && (
-				<ul className="grid grid-cols-2 min-[450px]:grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 gap-1 p-1 pb-24">
+				<ul className="grid grid-cols-2 min-[450px]:grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 gap-1 p-1 pb-44">
 					{list.map((pokemon, i) => (
 						<li
 							key={pokemon.name}
