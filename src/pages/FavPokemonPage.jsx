@@ -2,7 +2,7 @@ import { useState } from "react";
 import FavoriteList from "../components/FavPokemon/FavoriteList";
 import LocationSlider from "../components/FavPokemon/LocationSlider";
 
-export default function FavPokemon() {
+export default function FavPokemonPage() {
 	const [background, setBackground] = useState(
 		localStorage.getItem("boxBackground") || "forest"
 	);

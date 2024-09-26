@@ -14,7 +14,7 @@ export default function Header() {
 					preserveAspectRatio="none"
 				>
 					<path id="curve" d="M 0 60 Q 110 40 220 60" fill="transparent" />
-					<text width="100%" class="text-3xl font-bold">
+					<text width="100%" className="text-3xl font-bold">
 						<textPath
 							href="#curve"
 							startOffset="50%"

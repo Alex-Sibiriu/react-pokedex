@@ -4,7 +4,12 @@ import TypeBadge from "../UI/TypeBadge";
 import { formatName } from "../../utils/typo";
 import ShinyStars from "../UI/ShinyStars";
 
-export default function MainDetails({ pokemon, genera = "", dexNum }) {
+export default function MainDetails({
+	pokemon,
+	genderRate,
+	genera = "",
+	dexNum,
+}) {
 	const [isShiny, setIsShiny] = useState(false);
 
 	const favoritesPkm = JSON.parse(localStorage.getItem("FavoritesPkm")) || [];
@@ -22,6 +27,9 @@ export default function MainDetails({ pokemon, genera = "", dexNum }) {
 	function toggleShiny() {
 		setIsShiny(!isShiny);
 	}
+
+	const femalePercentage = genderRate === -1 ? null : (genderRate / 8) * 100;
+	const malePercentage = genderRate === -1 ? null : 100 - femalePercentage;
 
 	const pokeHeightArray = pokemon.height.toString().split("");
 	const pokeHeight =
@@ -92,7 +100,26 @@ export default function MainDetails({ pokemon, genera = "", dexNum }) {
 						{pokeWeight} kg
 					</p>
 					<p className="pb-2">
-						<strong>Gender Rate: </strong>
+						<strong>Gender Rate: </strong>{" "}
+						{!femalePercentage ? "genderless" : ""}
+						{(femalePercentage || malePercentage) && (
+							<div className="relative mt-2">
+								<progress
+									value={femalePercentage}
+									max={100}
+									className="border-2 border-stone-100 h-6"
+								/>
+								<p className="capitalize text-white font-medium absolute top-0 left-1/2 -translate-x-1/2 w-full text-center">
+									{!femalePercentage && "male 100%"}
+									{!malePercentage && "female 100%"}
+									{femalePercentage && malePercentage
+										? `female ${femalePercentage}% - male ${
+												100 - femalePercentage
+										  }%`
+										: ""}
+								</p>
+							</div>
+						)}
 					</p>
 
 					{!pokemon.name.includes("-vmax") &&

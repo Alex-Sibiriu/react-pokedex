@@ -1,6 +1,6 @@
 import { setBgColors } from "../utils/setColors";
 import StatsTab from "../components/PokeDetailPage/StatsTab";
-import { Link, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import MainDetails from "../components/PokeDetailPage/MainDetails";
 import AbilityDetails from "../components/PokeDetailPage/AbilityDetails";
@@ -11,6 +11,7 @@ import EvolutionChain from "../components/PokeDetailPage/EvolutionChain";
 
 import { suffixesToRemove } from "../utils/typo";
 import Loader from "../components/UI/Loader";
+import Error from "../components/UI/Error";
 
 function fetchPokemon(name) {
 	return fetch(`https://pokeapi.co/api/v2/pokemon/${name}`).then((response) =>
@@ -65,7 +66,8 @@ export default function PokeDetailsPage() {
 				<DetailHeader id={evoData.id} />
 				<MainDetails
 					pokemon={pokemon}
-					genera={evoData?.genera}
+					genderRate={evoData.gender_rate}
+					genera={evoData.genera}
 					dexNum={evoData.pokedex_numbers[0].entry_number}
 				/>
 				<AbilityDetails pokemon={pokemon} />
@@ -82,12 +84,16 @@ export default function PokeDetailsPage() {
 	}
 
 	if (error || evoError) {
-		content = <div>Error: {error.message || evoError.message}</div>;
+		content = (
+			<div className="h-full">
+				<Error message={"Error occurred, pokémon not found!"} />
+			</div>
+		);
 	}
 
 	return (
 		<div
-			className={`w-full h-full pt-1 transition-all duration-700 mt-4 bg-gradient-to-br border-4 border-b-0 border-yellow-400 rounded-md ${
+			className={`w-full h-full transition-all duration-700 mt-4 bg-gradient-to-br border-4 border-b-0 border-yellow-400 rounded-md ${
 				isLoading || evoIsLoading ? "overflow-hidden" : "overflow-y-auto"
 			} ${setBgColors(pokemon?.types)}`}
 		>

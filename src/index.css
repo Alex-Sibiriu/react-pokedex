@@ -84,6 +84,34 @@ ul,li {
   background-color: #ffcc00;
 }
 
+/* WebKit-based browsers (Chrome, Safari) */
+progress {
+  width: 100%;
+  height: 20px;
+  -webkit-appearance: none;
+  appearance: none;
+  border-radius: 20px;
+  overflow: hidden;
+}
+
+progress::-webkit-progress-bar {
+  background: linear-gradient(to bottom, rgb(79, 79, 255), rgb(0, 0, 221)) ; 
+  border-radius: 5px;
+  overflow: hidden;
+}
+
+progress::-webkit-progress-value {
+  background: linear-gradient(to bottom, rgb(255, 142, 255), rgb(218, 76, 218)); 
+  border-radius: 5px;
+}
+
+/* Firefox */
+progress::-moz-progress-bar {
+  background: linear-gradient(to bottom, violet, rgb(210, 62, 210)); 
+  border-radius: 5px;
+}
+
+
 .bg-pkImage {
   background: linear-gradient(to bottom ,#79F3FE , #0573A6 );
   background-attachment: fixed;
@@ -182,6 +210,12 @@ ul,li {
   100%{
     padding-top: 15px;
   }
+}
+
+.errorComponent {
+  background-image: url('/public/assets/errorBg.jpg');
+  background-size: cover;
+  background-position: center;
 }
 
 @media  screen and (min-width: 500px) {

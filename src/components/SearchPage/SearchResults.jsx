@@ -1,11 +1,10 @@
 import { useQuery } from "@tanstack/react-query";
-import { Link } from "react-router-dom";
-import ImageComponent from "../UI/ImageComponent";
 import { useState } from "react";
 import { useSelector } from "react-redux";
 import { formatName } from "../../utils/typo";
 import Loader from "../UI/Loader";
 import PokemonList from "../PokemonList";
+import Error from "../UI/Error";
 
 function fetchPokemons() {
 	return fetch(`https://pokeapi.co/api/v2/pokemon?limit=1025`).then(
@@ -67,7 +66,7 @@ export default function SearchResults() {
 	if (error || typeError1 || typeError2) {
 		return (
 			<p className="capitalize w-full h-full text-center content-center font-medium">
-				Error: {error.message || typeError1.message || typeError2.message}
+				<Error message={"Error occurred, please try again later."} />
 			</p>
 		);
 	}
