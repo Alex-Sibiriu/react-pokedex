@@ -18,7 +18,7 @@ export default function RootLayout() {
 					<Header />
 				</header>
 
-				<main className="w-full flex-grow text-stone-800 rounded-b-xl bg-red-700 mx-auto px-8 py-4 flex flex-col overflow-hidden">
+				<main className="w-full flex-grow text-stone-800 rounded-b-xl bg-red-700 mx-auto px-4 md:px-8 py-4 flex flex-col overflow-hidden">
 					<div className="flex h-full w-full overflow-hidden border-b-4 rounded-b-lg border-yellow-400">
 						<Outlet />
 					</div>
