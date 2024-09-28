@@ -17,7 +17,7 @@ export default function FavPokemonPage() {
 
 	return (
 		<div className="w-full pt-4">
-			<LocationSlider onClick={handleBoxBg} background={background} />
+			<LocationSlider changeLocation={handleBoxBg} background={background} />
 			<FavoriteList background={background} />;
 		</div>
 	);

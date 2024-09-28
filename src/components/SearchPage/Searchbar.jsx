@@ -1,20 +1,16 @@
 import { useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setSearch } from "../../store/searchParams";
-import { useNavigate } from "react-router-dom";
 import GenerationsList from "./GenerationsList";
 import TypesList from "./TypesList";
 
 export default function Searchbar() {
 	const toSearch = useSelector((state) => state.searchParams.toSearch);
 	const dispatch = useDispatch();
-	const navigate = useNavigate();
 	const searchValue = useRef("");
 
 	function handleChange() {
 		dispatch(setSearch(searchValue.current.value.trim()));
-
-		navigate("/");
 	}
 
 	return (

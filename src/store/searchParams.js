@@ -23,7 +23,7 @@ const searchSlice = createSlice({
 			state.selectedTypes.type_2 = action.payload;
 		},
 		setSearch(state, action) {
-			state.toSearch = action.payload;
+			state.toSearch = action.payload.toLowerCase();
 		},
 	},
 });

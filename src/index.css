@@ -27,6 +27,10 @@ ul,li {
   font-size: .6rem;
 }
 
+.text-stroke-white {
+  -webkit-text-stroke: 1px white;
+}
+
 .pokedex {
   height: 90%;
 }

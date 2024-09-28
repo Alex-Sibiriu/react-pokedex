@@ -17,7 +17,7 @@ import "../../index.css";
 
 import { EffectFade, Keyboard, Navigation } from "swiper/modules";
 
-export default function LocationSlider({ onClick, background }) {
+export default function LocationSlider({ changeLocation, background }) {
 	return (
 		<div className="flex items-center gap-2 w-full">
 			<button className="custom-prev transition-all w-6 h-6 flex items-center justify-center rounded-full border-r-2 border-b-2 cursor-pointer text-sm z-10 shrink-0 bg-yellow-400 border-yellow-600">
@@ -35,14 +35,14 @@ export default function LocationSlider({ onClick, background }) {
 				effect="fade"
 				fadeEffect={{ crossFade: true }}
 				initialSlide={locations.findIndex((l) => l === background)}
+				onSlideChange={(swiper) => changeLocation(locations[swiper.realIndex])}
 				modules={[Keyboard, Navigation, EffectFade]}
 				className="mySwiper mx-auto border-4 border-yellow-500 rounded-lg "
 			>
 				{locations.map((location) => (
 					<SwiperSlide key={location}>
 						<p
-							onClick={() => onClick(location)}
-							className="text-center text-md cursor-pointer font-bold w-full transition-all capitalize bg-cover bg-center py-2 text-stone-800"
+							className="text-center text-md cursor-pointer font-black text-lg w-full transition-all capitalize bg-cover bg-center py-2 text-stone-800 text-stroke-white"
 							style={{
 								backgroundImage: `url(${location})`,
 							}}
@@ -53,7 +53,7 @@ export default function LocationSlider({ onClick, background }) {
 				))}
 			</Swiper>
 
-			<button className="custom-next transition-all w-6 h-6 flex items-center justify-center rounded-full border-r-2 border-b-2 cursor-pointer text-sm z-10 shrink-0 bg-yellow-400 border-yellow-600">
+			<button className="custom-next transition-all w-6 h-6 flex items-center justify-center rounded-full border-r-2 border-b-2 cursor-pointer text-sm z-10 shrink-0 bg-yellow-400 border-yellow-600 ">
 				<FontAwesomeIcon icon={faChevronRight} />
 			</button>
 		</div>
