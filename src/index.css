@@ -181,14 +181,6 @@ progress::-moz-progress-bar {
   }
 }
 
-
-.poke-shadow {
-  background-image: url('/public/assets/shadow.png');
-  background-position-y: 83%;
-  background-size: contain;
-  background-repeat: no-repeat;
-}
-
 .poke-sprite{
   padding-top: 15px;
 }

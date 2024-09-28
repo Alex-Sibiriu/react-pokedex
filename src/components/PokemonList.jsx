@@ -24,13 +24,10 @@ export default function PokemonList({ list, fallback }) {
 						>
 							<Link
 								to={`/pokemon/${pokemon.name}`}
-								className={`flex flex-col justify-center items-center relative p-2 rounded-sm h-full ${
+								className={`flex flex-col justify-center items-center p-2 rounded-sm h-full ${
 									pokemon.url ? "bg-pkImage" : ""
 								} `}
 							>
-								{!pokemon.url && (
-									<div className="poke-shadow absolute w-full h-full"></div>
-								)}
 								<ImageComponent
 									src={pokemon.url ? findSprite(pokemon.url) : pokemon.sprite}
 									alt={`Sprite of ${pokemon.name}`}
