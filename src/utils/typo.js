@@ -108,6 +108,7 @@ export const suffixesToRemove = [
 	"-pom-pom",
 	"-pau",
 	"-sensu",
+	"-paldea",
 ];
 
 export function formatName(name) {
