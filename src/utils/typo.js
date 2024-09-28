@@ -1,5 +1,6 @@
 export const suffixesToRemove = [
 	"-three-segment",
+	"-two-segment",
 	"-full-belly",
 	"-hangry",
 	"-drive-mode",
