@@ -47,7 +47,7 @@ export default function PokemonList({ list, fallback }) {
 			)}
 
 			{list.length === 0 && (
-				<div className="capitalize w-full pt-20 text-center text-xl content-center font-black text-stroke-white">
+				<div className="capitalize w-full pt-20 text-center text-2xl content-center font-bold text-stroke-white">
 					{fallback}
 				</div>
 			)}

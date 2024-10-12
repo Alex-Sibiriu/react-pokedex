@@ -15,19 +15,6 @@ function getPkmNum(speciesUrl) {
 }
 
 function printTrigger(obj) {
-	const printedKeys = {};
-
-	Object.keys(obj).map((key) => {
-		const keyString =
-			typeof obj[key] === "object" ? JSON.stringify(obj[key]) : key;
-
-		if (printedKeys[keyString]) {
-			return null;
-		}
-
-		printedKeys[keyString] = true;
-	});
-
 	const symbols = {
 		1: ">",
 		"-1": "<",
@@ -151,7 +138,7 @@ export default function EvolutionChain({ url }) {
 										className="w-full flex flex-col sm:flex-row sm:justify-between items-center"
 									>
 										<ul className="text-center flex-grow sm:pr-4 text-sm py-4 sm:p-0">
-											{evo.evolution_details.map((e) => printTrigger(e))}
+											{printTrigger(evo.evolution_details.at(-1))}
 										</ul>
 										<div className="shrink-0">
 											<Link
@@ -184,7 +171,7 @@ export default function EvolutionChain({ url }) {
 											className="w-full flex flex-col sm:flex-row sm:justify-between items-center"
 										>
 											<ul className="text-center flex-grow sm:pr-4 text-sm py-4 sm:p-0">
-												{evo.evolution_details.map((e) => printTrigger(e))}
+												{printTrigger(evo.evolution_details.at(-1))}
 											</ul>
 											<div className="shrink-0">
 												<Link to={`/pokemon/${evo.species.name}`}>
